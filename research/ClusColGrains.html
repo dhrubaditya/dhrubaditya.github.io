@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Research: Classical non-equilibrium diamagnetism </title>
+<link href= "../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../index.html">Home</a></li>
+    <li id="selected"><a href="./index.html">Research</a></li>
+    <li id="selected"><a href="./ClusColGrains.html">Grains in Flows.</a></li>
+  </ul>
+</div>
+<div id="lcontent">
+  <b> Clustering and Collision of grains in flows: </b>
+  <p> In the last decade a significant advance has been made in
+  understanding the behaviour of small heavy particles advected by
+  turbulent flows. There are two principal motivations to study such
+  problem. One is to understand rain formation and the second is to
+  understand the formation of planets in a circumstellar disk. In both
+  of these cases the crucial question is whether small objects can
+  collide (frequently enough, in the right range of relative speeds)
+  to eventually merge and form bigger objects -- raindrop in one case
+  and planetesimals in the other. </p>
+
+  <p> Most of the work has concentrated on study of small spherical objects. The
+  behaviour of non-spherical but still small heavy objects can
+  potentialy be quite different from spherical ones. Note further that
+  although raindrops are to a good approximation spherical, the
+  astrophysical dust is not. Our aim in this project is to study
+  clustering and possible collisions between non-spherical
+  objects. <p>
+
+  <p> The simplest model of a non-spherical object would be an
+  ellipsoid. Let us start by considering an ellipsoid with three
+  principal axis. In what follows, we shall call an ellipsoid "a
+  grain".  We shall start by making the following
+  approximations: </p>
+  <ul>
+    <li> The grains are passive objects, they do not modify the
+    flow.
+    <li> The grains are small and heavy such that the drag on them
+    due to the flow, which would generate both a drag force and a drag
+    torque (which is absent for spherical particles) can be obtained by
+    solving the Stokes equation.
+    <li> We ignore mutual interaction between two grains. This is
+  a reasonable approximation for a low number density of grains. 
+    <li> The flow is not obtained by solving the Navier-Stokes
+  equation but is a time-independent solution of the Euler equation
+  which has chaotic behaviour, in particular, the ABC
+  (Arnold-Beltrami-Childress) flow. 
+   </ul>
+  <p> We would then have to solve the following numerical problem. The
+  instantaneous velocity and angular velocity of a grain and the
+  local velocity and its gradients (strain and vorticity) sets the
+  drag for and drag torque. These are given the by the Jeffery's
+  equation. With the force and torque thus determined, we need to
+  solve the equation of motion of a rigid body. This last step is best
+  done by using the quaternions to describe the rigid body
+  rotations. </p>
+   <p> The aim of the project is to calculate the following quantities:
+   <ul>
+      <li> How do the grains cluster ? This can be quantified by
+     calculating the radial distribution function of their center of
+  mass. 
+     <li> Are the orientations of the grains correlated ?
+     <li> More generally, we can calculate the joint probability
+  density function of their relative position, relative angles and
+  relative velocities. From this we can calculate the average number
+  of collisions per-unit-time, per-unit-volume (in a large volume) of
+  between two grains. 
+   </ul>
+   </p>
+   
+  <p>We have a code that solves this problem. The time-stepping is
+  done by a Runge-Kutta fourth order method. The code is written in
+   C++ . As each grain is independent of every other grain this
+  problem is ripe for extreeme parallelisation. We have now
+  written a CUDA code to solve the problem in GPU. We have already
+  tested the code in GPU machines. We expect that the problem would
+  require averaging over very large number of snapshots. We also need
+  to scan a large range of parameters in terms of (a) the shape of the
+  grains (b) their stokes number which is a ratio of the stopping time
+  of a grain to characteristic time scale of flow.  </p>
+
+
+
+
+<p>
+</p>
+</div>
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Thu Jan 12 16:23:05 CET 2017 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>

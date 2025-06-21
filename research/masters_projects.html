@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Research: Possible masters projects </title>
+<link href= "../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../index.html">Home</a></li>
+    <li id="selected"><a href="./index.html">Research</a></li>
+    <li ><a href="./phd_thesis.html">PhD Thesis</a></li>
+    <li id="selected"><a href="./masters_projects.html">Possible Masters Projects</a></li>
+  </ul>
+</div>
+
+<div id="lcontent">
+<div id="joke">
+</div>
+<p>
+If you are a masters student in KTH or SU and want to do your masters project with me 
+you are welcome to contact me. Below I sketch a few possible projects. The purpose 
+is to give you an idea of the kind of problem we might attack. They are not set it stone. 
+</p>
+<div class="eachitem">
+<h4>Singularities of hyper-viscous Burgers equation </h4>
+
+In simulations of Navier--Stokes equation with hyperviscosity
+it is observed that the intermediate range between 
+dissipation range and the inertial range has a hump. This
+is called ``bottle-neck''. The explanation of this phenomenon
+might be along the following line. 
+
+The inertial range has a power-law scaling. For pure viscosity
+the dissipation range is an exponential fall-off of the
+form $e^{-k \delta}$ where $\delta$ is the distance to the
+nearest singularity in the complex space. Here the intermediate
+range is a matching between the exponential and the decreasing
+power-law function and the matching happens smoothly. 
+In presence of hyper-viscosity the nature of the complex space
+singularity will be changed. Hence the nature of the dissipation
+range will be changed and might have the form 
+$k^{\beta}e^{-k \delta}$ where $\beta$ is a positive power.
+Then the matching problem becomes more difficult and we
+might expect a hump. This idea cannot be easily put to test
+in the Navier--Stokes case, but can be put to test in the
+case of Burgers equation in the following way. 
+
+<ul>
+<li> First we have to check whether the Burgers equation shows 
+the ``bottle-neck'' effect or not. This can be easily confirmed
+by careful numerical spectral simulation of the Burgers equation 
+with and without hyperviscosity.
+</li> 
+<li> Next for non-hyperviscous Burgers equation we proceed
+in the following way. In the frame of a shock, throw-away the
+time-derivative. Then you have the equation
+\begin{equation}
+\partial_x(u^2)  = \nu \partial_{xx} u
+\end{equation}
+which can be integrated once to obtain, 
+\begin{equation}
+u^2 - a^2 = \nu \partial_x u 
+\end{equation}
+which can again be integrated to yield 
+\begin{equation}
+u(x) = a \tanh \left(\frac{x}{4\nu}\right) 
+\end{equation}
+The Fourier transform of this function should give the 
+correct form of the tail of the spectrum in Fourier space.
+</li>
+<li> To obtain the correct form of the spectrum in  the presence
+of hyperviscosity is more complicated. We need to study the
+ordinary differential equation 
+\begin{equation}
+\partial_x(u^2)  = \nu \partial_{xx} u + \nu_h \partial_{xxxx} u
+\end{equation}
+on which one integration gives
+\begin{equation}
+u^2 - a^2 = \nu \partial_x u + \nu_h \partial_{xxx} u 
+\end{equation}
+It is the third-derivative term which creates the problem. 
+We might study the fixed points of this differential equation
+to obtain some insight into the problem.
+
+A way to tackle this equation in a perturbative way
+is the following. Rescale $x$ to transform $x \to x/\nu$,
+and $\epsilon = \nu_h/\nu^3$. Then we have
+\begin{equation}
+u^2 - a^2 = \partial_x u + \epsilon \partial^3_x u 
+\label{u}
+\end{equation}
+Then start perturbation is $\epsilon$ by 
+\begin{equation}
+u = u_0 + \epsilon u_1 + \epsilon^2 u_2 + \ldots 
+\end{equation}
+Substituting this in Eq.~\ref{u} we get the following
+equation in different orders of $\epsilon$. 
+\begin{eqnarray}
+u_0^2 - a^2 &=& \partial_x u_0 \hspace{1cm} {\rm (zeroth order)}  \\
+2u_0u_1 &=& \partial_x u_1 + \partial_x^3 u_0 \hspace{1cm} {\rm (first order)} \\
+2u_0u_2 + u_1^2 &=& \partial_x u_2 + \partial_x^3 u_1 
+ {\rm (second order) } 
+\end{eqnarray}
+
+The zeroth order equation has the solution
+\begin{equation}
+u_0 = a \tanh\left(\frac{x}{4}\right)
+\end{equation}
+We next need to solve the first order equation. 
+</li>
+
+<li> Otherwise we might use dominant ballance and Painleve
+analysis to study the nature of the complex space singularities
+of the hyperviscous equation. The cube-derivative would probably
+give a cubic pole in the complex plane which will contribute
+to $k^2exp(-\delta k)$ to the tail of the spectrum. This would
+illustrate the positive power of $k$ prefactor to the
+exponential and then we might try to match this with a power-law
+in the inertial range and gain insight into the problem. 
+</li>
+</ul>
+Both the methods are somewhat hazy after the initial confidence
+but can perhaps be carried to conclusion.
+
+</div>
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Wed Apr 25 22:28:34 CEST 2012 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>

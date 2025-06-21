@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Research: Turbuphoresis </title>
+<link href= "../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../index.html">Home</a></li>
+    <li id="selected"><a href="./index.html">Research</a></li>
+    <li id="selected"><a href="./TurbuPhoresis.html">TurbuPhoresis</a></li>
+  </ul>
+</div>
+<div id="lcontent">
+
+<h4>Numerical Studies of Turbuphoresis </h4>
+
+<p>Study of turbulent flows with small particles suspended in them has wide range of 
+applicability. In the engineering context a typical example is dust deposition on 
+turbine blades or combustion chambers. In geophysical context a typical example is 
+spreading of dust after a volcanic explosion or worse a nuclear fall-out. 
+In astrophysical context a typical example is dusty accretion disks.</p> 
+
+<p>Small particles suspended in a fluid can be moved by imposing a temperature gradient, a 
+phenomenon known as thermophoresis that has been studied experimentally since 
+1870 [<a href="http://en.wikipedia.org/wiki/John_Tyndall">Tyndall</a>, Procedings of Royal 
+Institution of Great Britain, <b> 6</b> 3 (1870)] and theoretically since 
+1879 [<a href="http://en.wikipedia.org/wiki/James_Clerk_Maxwell">J.C. Maxwell</a>,  Scientific Papers 
+<b> 3</b> 709 (1879)]. In the last decade it has been observed in numerical simulations of turbulence, 
+that particles suspended in a turbulent flow can also develop a directional motion if the 
+flow is inhomogeneous; a phenomenon that has been named "Turbuphoresis". 
+The aim of this project is to study this phenomenon is a simple setting.</p>
+
+<p>In particular, recent direct numerical simulations (DNS) of particle-laden (the particles are 
+treated as heavy, inertial particles) channel 
+flow (<a href="http://journals.cambridge.org.focus.lib.kth.se/action/displayAbstract?fromPage=online&aid=8568262&fulltextType=RA&fileId=S0022112012000651 ">Sardina et al, Journal of Fluid 
+Mechanics, 2012</a>) have found  that initially, uniformly-distributed particles migrate 
+away from the center of the channel and cluster near the walls. In an attempt to understand 
+this phenomenon, <a href= "http://journals.aps.org/prl/pdf/10.1103/PhysRevLett.112.234502 ">Belan 
+et al (Phys. Rev. Lett. 2014)</a> have argued that this clustering is due to inhomogeneity of 
+turbulence in the channel.  Our focus is to test this suggestion in an even simpler setting. 
+</p>
+<p>We plan to run simulations of forced turbulence, where the forcing is inhomogeneous is space. 
+In particular, it is a harmonic function of one of the coordinate, say $z$. Due to the 
+inhomogeneity of the turbulence, this setup should generate a flux of particles. 
+In analogy with thermophoresis, we model this flux by
+\begin{equation}
+{\bf J} = -\kappa \nabla n - n \kappa_{\rm u} \nabla [u_{\rm rms}^2] 
+\end{equation} 
+where $\kappa$ is the diffusion coefficient for particle number density $n$ and $\kappa_u$ the 
+coefficient of turbuphoresis that we want to measure.  When the simulations reach stationary state, 
+the flux must be zero, hence by balancing the two terms on the right hand side of the above 
+equation we can calculate $\kappa_u$. We would then want to calculate $\kappa_u$ as a function of the inertia of the suspended particles, as measured by the Stokes number. 
+</p>
+A slightly more detailed plan of our work is described in the hand-written notes in 
+<a href="./TurbuPhoresis1.pdf">this pdf file</a>.
+<h5> Preliminary Results </h5>
+   <p> Our simulations have shown that the heavy particles form clusters. Assuming the prescription of the 
+       flux given above, we can calculate the ratio of the two turbulent transport coefficients, 
+        $\kappa_{\rm u}/\kappa$ from our simulation. Let us call this ratio the turbulent Soret number 
+        \begin{equation}
+           {\rm So} \equiv \frac{\kappa_{\rm u}}{\kappa}
+        \end{equation}
+   </p> 
+   We find that ${\rm So}$ has a non-monotonic dependence on the Stokes number. I presented these preliminary
+   results in the Woods Hole GFD summer school in July 2015. The slides of the talk can be found 
+   <a href="TuPh.pdf"> here</a>.
+<h5> Further Studies </h5>
+  There are two straightforward extensions of this work that we propose below:
+  <ul> 
+    <li> <b> How does bubbles cluster in inhomogeneous flows ? </b>
+          In the work above we have assumed that the particles in the flow are heavy inertial particles
+          which is a good approximation for small spherical dust grains in flows. The equation 
+          satisfied by such particles is given by 
+          \begin{eqnarray}
+           \dot{{\bf x}} &=& {\bf v} \\ 
+           \dot{{\bf v}} &=& \frac{1}{\tau}[{\bf u}-{\bf v} ]\\ 
+          \end{eqnarray} 
+          Here ${\bf x}$ and ${\bf v}$ are the position and velocity of a particle, and ${\bf u}$ is the 
+          fluid velocity at the position of the particle. 
+
+          We can then ask, how does bubbles (particles that are lighter than the fluid) cluster in 
+          inhomogeneous flows ? The equation satisfied by 
+          small bubbles includes on additional term in the equation above, such that, 
+          \begin{eqnarray}
+           \dot{{\bf x}} &=& {\bf v} \\ 
+           \dot{{\bf v}} &=& \frac{1}{\tau}[{\bf u}-{\bf v} ] + \beta \frac{D {\bf u}}{Dt}\\ 
+          \end{eqnarray} 
+          where $\tau = a^2/3\beta\nu$ and $\beta= 3 \rho_{\rm f}/(\rho_{\rm f} + \rho_{\rm p})$, 
+          $D {\bf u}/Dt$ is advective derivative, $a$ the radius of the bubble and $\nu$ is the kinematic
+          viscosity. The additional term is called the added mass force. 
+          It would be relatively straightforward to add this term to the pencil-code.  
+    <li> <b> How does non-spherical particles cluster in inhomogeneous flows ? </b>
+  </ul> 
+<h5> Computational Resources </h5>
+<p>We shall use the pencil-code, which is a open-source MPI parallelized solver the partial differential equations (PDEs) that are relevant to fluid and magnetohydrodynamic turbulence. The code shows (weak) linear scaling up to 70, 000 cores. I am one of the core developers of this code. As part of other SNIC projects the code has been ported and ran in abisko.</p> 
+
+<p>It would be necessary to run the code in 384^3 and 768^3 resolutions in periodic boxes. To get the best results we need to run the code over 768 cores which would imply 16 nodes of abisko. 
+We would also perform smaller runs with 384^3 resolution with 192 cores.</p> 
+
+<p>Let us first estimate the core-hours necessary for the runs with 384^3  resolution. The simulation will need to reach a stationary state before particles can be introduced. It is often necessary to run for several large-eddy-turnover times (the largest correlation time in the system) before the system reaches a stationary state. We have calculated that the code requires about 2X10^{-2} microseconds per timestep per meshpoint for 384^3 resolution using 192 cores. 
+One large-eddy-turnover time requires about 2000 time steps. 
+Hence the number of core-hours necessary is approximately 
+0.63X192 core-hours for one large-eddy-turnover time. To calculate statistically reliable data it would be necessary  to eventually run for about 100 large-eddy turnover times. This would imply in total about 12000 core-hours.The memory requirement for such a job is 1.8 GB. 
+</p>
+<p>
+If we now extrapolate to jobs with 768^2 resolution, then assuming linear scaling we expect roughly the same time for one-eddy-turnover time, but because of time-step limitations coming from CFL criterion one-eddy-turnover time now requires 10 times more timestep.  This would imply 6.3X768 core hours per one large-eddy turnvoer time. At this resolution we expect to run for about 25 large-eddy-turnover times which implies  in total about 120,000 core hours. The memory requirement for such a job is 14.5 GB. 
+</p>
+<p>
+To summarise, in total we shall require about 132,000 core-hours for two sets of jobs. One set will be run with 192 cores and requires 1.8 GB of total memory. The other set will be run with 768 cores and requires 14.5 GB of memory. Assuming some the runs need to be rerun due to accidental mistakes it is necessary to have about 140,000 core-hours for this project. 
+</p>
+<p>As the project is timely and topical it requires urgent attention. We aim to finish the project within two months. Hence we would ask for 70,000 core-hour per month.</p> 
+</div>
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Wed Apr 25 22:28:34 CEST 2012 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>

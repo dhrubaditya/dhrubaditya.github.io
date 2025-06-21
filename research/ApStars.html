@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Research: Ap Stars </title>
+<link href= "../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../index.html">Home</a></li>
+    <li id="selected"><a href="./index.html">Research</a></li>
+    <li id="selected"><a href="./ApStars.html">Ap Stars</a></li>
+  </ul>
+</div>
+<div id="lcontent">
+
+<h4>On peculiar abundance of certain heavy elements in Ap stars </h4>
+
+<p> In astronomy, stars are sometime classified by the spectral composition of their lights; 
+see e.g., <a href="http://en.wikipedia.org/wiki/Stellar_classification#Class_A ">this</a> wikipedia 
+article for a quick introduction. Among all the stars, the most common ones those can be seen with 
+naked eyes are the A stars. The light from these stars is white or bluish-white. They 
+have strong hydrogen lines and also lines of ionized metals. A certain class of stars are called
+<a href="http://en.wikipedia.org/wiki/Ap_and_Bp_stars">Ap Stars</a>, which are "peculiar" A 
+stars. They are peculiar because they show overabundance of certain elements, for example, 
+<a href="http://en.wikipedia.org/wiki/Strontium">strontium</a>, 
+<a href= "http://en.wikipedia.org/wiki/Chromium">chromium</a> 
+and <a href="http://en.wikipedia.org/wiki/Europium">europium</a>.
+These stars also have much slower rotation rate than normal A or B type stars. 
+This project is an attempt to understand the peculiary (or overbundance) of these stars. 
+</p>
+
+<h5>Introduction </h5>
+<p>
+These stars typically have a hydrogen atmosphere with a shallow convective zone. 
+Naively speaking, one would expect the heavy elements to sink in a hydrogen atmosphere, 
+hence their characteristic lines would be absent from the spectra of the star. 
+This conundrum is solved by realising that in addition to gravity, radiation pressure
+acts on the heavy ions. This gives rise to an accelation of the heavy ions  
+given by 
+\begin{equation}
+g_{\rm rad} = \frac{1}{mc}\int \sigma_{\nu}F_{\nu} d\nu
+\end{equation}
+Where $F_{\nu}d\nu$ is the net outward radiation flux in the frequency range $d\nu$, $\sigma_{\nu}$ is the
+absorption cross-section for light with frequency $\nu$, $m$ is the mass of the ion and $c$ the speed of light;
+see e.g., <a href="http://articles.adsabs.harvard.edu/cgi-bin/nph-iarticle_query?1970ApJ...160..641M&amp;data_type=PDF_HIGH&amp;whole_paper=YES&amp;type=PRINTER&amp;filetype=.pdf ">Michaud, ApJ, 1970 </a>.
+This acceleration can drive the ions up, depending on their mass and absorption cross-section. 
+It is necessary to solve for detailed numerical models to calculate the abundance of the heavy elements
+and the resulting spectral from models of stellar atmosphere. 
+Such calculations (references ?) are generally succesful is reproducing the "peculiarity" of the Ap start. 
+But such calculations ignore a particularly important effect, that of turbulence of the 
+convection zone of these stars. To appreciate the role of turbulence, note that in our 
+discussions above we have so far ignored the diffusion of the atoms. 
+The effects of diffusion is not a large one because atmoic diffusion coefficients are typically small. 
+But <a href="http://plms.oxfordjournals.org/content/s2-20/1/196.full.pdf+html">turbulence gives rise to diffusion</a> 
+and the turbulent diffusion coefficients are typically quite large. 
+So how do we justify neglecting turbulent mixing (or turbulent diffusion) in this problem ? 
+One way is to realise that the Ap stars also have a large magnetic fiel (in one case it 
+has been found to be be as large as $42$KGauss ). Could this large magnetic field "quench"
+turbulent diffusivisity ? We intend to perform numrical experiments to test this hypothesis. 
+</p>
+<h5> Numerical Experiments </h5>
+<p>
+Our domain is a periodic box of size $2\pi$ in each direction. 
+We solve for the equations of isothermal magnetohydrodynamics, 
+\begin{eqnarray}
+\partial_t (\rho U_i) + {\rm div}(\rho U_iU_j) &=& -{\rm grad}(p) + \nu\nabla^2 U_i + \frac{1}{\mu_0}({\bf J}\times{\bf B}) + {\bf f} \\
+\partial_t \rho + {\rm div}({\bf U}\rho) &=& 0  \\
+c^2_s &=& \gamma \frac{p}{\rho} = {\rm constant}\\
+\partial_t {\bf B} &=& {\rm curl}({\bf U}\times{\bf B} -\eta {\bf J})  
+\end{eqnarray}
+where ${\bf J} = {\rm curl}({\bf B})$. Here instead of running a simulation of convection we simulate forced 
+turbulence.  In addition we solve for the equation of a passive scalar, 
+\begin{equation}
+\partial_t \theta + {\rm div}({\bf U}\theta) = \kappa\nabla^2 \theta  
+\end{equation}  
+If there had been no turbulence the scalar would diffuse with a diffusion constant $\kappa$ which is typically
+very small. In the presence of turbulence, we expect that the diffusion will be enhanced.
+A specific way to quantify this enhancement appears laters. 
+Next We impose a constant magnetic field, 
+${\bf B} = \hat{z}B_0$. 
+We expect that at high $B_0$ the turbulent transport of scalar along the vertical ($z$) direction will be 
+suppressed. A quantitative way to measure this would be to <a href="http://en.wikipedia.org/wiki/Reynolds-averaged_Navier%E2%80%93Stokes_equations ">Reynolds average</a> the equation for the passive scalar
+and write an effective equation. This equation would contain the effective turbulent diffusivity, $\kappa_{\rm t}$
+in the following manner:
+\begin{equation}
+\partial_t \Theta = (\kappa_{\rm t} + \kappa) \nabla^2 \Theta
+\end{equation}
+where $\Theta = {\bar \theta}$, and the symbol ${\bar \cdot}$ denotes Reynolds averaging. 
+One way of Reynolds averaging is to average over the coordinate directions $x$ and $y$. If this
+prescription of Reynolds averaging is used, the effective equation looks like:
+\begin{equation}
+\partial_t \Theta = (\kappa_{\rm t} + \kappa) \partial_z^2 \Theta
+\end{equation}
+which, under Fourier transform in space takes the form:
+\begin{equation}
+\partial_t {\hat \Theta} = -\kappa_{\rm T} q^2 {\hat \Theta}
+\end{equation}  
+with $\kappa_{\rm T} = \kappa_{\rm t} + \kappa$
+Hence, a way to measure $\kappa_{\rm T}$ is to calculate $\Theta(z) = \langle \theta(x,y,z) \rangle_{xy}$, 
+transform it to Fourier space to construct ${\hat \Theta}(q,t)$ which in time is expected to show
+\begin{equation}
+{\hat\Theta}(q,t) = {\hat\Theta}(q,0)\exp[-\kappa_{\rm T}(q) q^2 t] 
+\end{equation}  
+Unfortunately the turbulent transport coefficient in contrast with the molecular transport coeffeicient, $\kappa$,
+is not a constant but a function of the the wave number $q$. 
+We intend to calculate $\kappa_{rm t}$ by the method explained above.  
+In the presence of the external magnetic field we expect 
+$\kappa_{\rm t}(q,B_0)$ 
+to decrease as a function of 
+$B_0$ particularly for larger $B_0$ we anticipate catastrophic quenching, which implies that 
+\begin{equation} 
+\kappa_{\rm t}(q,B_0) \sim \frac{\kappa_{\rm t}(q,0)}{B_0} 
+\end{equation}
+</p> 
+<h5> Computational Resources </h5>
+<p>We shall use the pencil-code, which is a open-source MPI parallelized solver the partial differential equations (PDEs) that are relevant to fluid and magnetohydrodynamic turbulence. The code shows (weak) linear scaling up to 70, 000 cores. I am one of the core developers of this code. As part of other SNIC projects the code has been ported and ran in abisko.</p> 
+
+<p>It would be necessary to run the code in 256^3 and 512^3 and 1024^3 resolutions in periodic boxes. 
+Let us first estimate the resources necessary to run in $256^3$ grid points: 
+Our tests in the computer beskow shows that for this case the code takes 
+$6.421\times10^{-3}$ $\mu s$ per-grid point, per-time-step. Roughly speaking, we need to run the code
+for about 10 large-eddy-turnover-times. One large-eddy-turnover-time is about $10$ unit of time in code-units. 
+The time-step used in these simulations are $\delta t = 10^{-4}$ in code units. Hence one large-eddy-turnover-time
+implies about $10^5$ iterations. And $10$ large-eddy-turnover-time simply $10^6$ iterations. Hence,
+one such run requires 
+\begin{eqnarray}
+T &=& 6.421 \times 10^6 \times 256^3 \times 10^{-3} 10^{-6} s  \\
+ &=& 29.924 Hr \approx 30 Hr  \\
+ &=& 30 \times 256 core hours = 7680 core hours 
+\end{eqnarray} 
+We shall need to run one such run for one value of the magnetic field. It would be necessary to use at least $16$ 
+different values of the magetic field. Which implies that we shall require $122880 \approx 130,000$ core hours. 
+The memory requirement of one such run is $1.3$ GB. </p>
+<p>
+As the code has been demonstrated to show linear scaling we can continue this argument to estimate the time 
+necessary to run for $512^3$ resolutions. In that case the minimum grid spacing will decrease by a factor of two
+hence we expect the necessary time-step to decrease at least by a factor of two too. Then one large-eddy-turnover-time
+requires $2\times10^5$ iterations. To reach the same time per-grid-point per-time-step we would need to use 
+$256\times 8 = 2048$ number of processors. This may be too large a number. We would choose to use $512$ number of processors.
+Hence we expect the time necessary to increase by a factor of $4$. Putting everything together, one run of $10$ 
+large-eddy-turnover-times will require:
+\begin{eqnarray}
+T &=& 6.421 \times 10^6 \times 256^3 \times 10^{-3} 10^{-6} s  \times 2 \times 4\\
+ &\approx& 240 Hr  \\
+ &=& 30 \times 512 core hours = 122880 core hours 
+\end{eqnarray}
+Each of these runs will be run for $8$ different values of the magentic field, hence we shall require 
+$983040\approx 1000,000$ core-hours. Each of these runs will require $11.4$ GB. 
+</p> 
+
+<p>In total, we shall need $1130,000$ core hours. Assuming some of the runs will be lost due to accidental 
+mistakes we ask for $1400,000$ core hours. If we ask for the maximum amount allowed within a medium 
+level application, which is $200, 000$ core hours, it would take us $7$ months to complete the work.  
+</p>
+
+
+ </p>  
+</div>
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Wed Apr 25 22:28:34 CEST 2012 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>

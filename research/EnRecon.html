@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Research: Magnetic Reconnection and Energization</title>
+<link href= "../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../index.html">Home</a></li>
+    <li id="selected"><a href="./index.html">Research</a></li>
+    <li id="selected"><a href="./EnRecon.html">Reconnection</a></li>
+  </ul>
+</div>
+<div id="lcontent">
+
+<h3>On Magnetic Reconnection and Energization of Charged Particles. </h3>
+
+<p> The <a href=http://en.wikipedia.org/wiki/Corona>Solar Corona</a> is a fascinating 
+object. From spectral observations the temperature of the corona is estimated to be
+more than a million Kelvins. But the temperature of the inner regions of the sun,
+e.g., the photosphere is much less. Hence the corona must have its own heating mechanism. 
+This mechanism is believed to be dominated by the coronal magnetic field. 
+The physics of the corona is determined by the equations that determine motions of 
+plasma. The equations of magnetohydrodynamics may be a reasonable approximation. 
+The resistivity of the corona is very low. 
+ In this regime, it is useful to consider
+the coronal physics in the limit (but not equal to) of zero resistivity. This is
+the limit where the topology of magnetic field lines are almost a conserved quantity. 
+Then the topology of the magnetic field lines are supposed to change suddenly 
+giving rise to sudden dissipation of energy. A phenomenon known as magnetic reconnection. 
+The aim of this project is to understand this phenomenon. In addition, let us also
+ask the question, where does the dissipated energy go ? Normally, the answer is that
+the dissipated energy goes into the thermal modes of the plasma (the kinetic energy 
+of the electrons and the ions). But it could also happen that the electrons (and ions)
+exited by the dissipative process cannot be described by a thermal distribution. 
+The second aim of this project is to study this possibility.  
+
+</p>
+
+<h4>Introduction </h4>
+<p>
+Let us first look at the problem in the spirit of a numerical experiment. 
+We study the same setup as used by <a href="http://arxiv.org/abs/0904.0823">Loureiro et al</a>
+but in three dimensions. 
+</p>
+<h4> Numerical Experiments </h4>
+<p>
+Our domain is a periodic box of size $2\pi$ in each direction. 
+We solve for the equations of isothermal magnetohydrodynamics, 
+\begin{eqnarray}
+\partial_t (\rho U_i) + {\rm div}(\rho U_iU_j) &=& -{\rm grad}(p) + \nu\nabla^2 U_i + \frac{1}{\mu_0}({\bf J}\times{\bf B}) + {\bf f} \\
+\partial_t \rho + {\rm div}({\bf U}\rho) &=& 0  \\
+c^2_s &=& \gamma \frac{p}{\rho} = {\rm constant}\\
+\partial_t {\bf B} &=& {\rm curl}({\bf U}\times{\bf B} -\eta {\bf J} + \eta {\bf J}_{\rm ini})  
+\end{eqnarray}
+where ${\bf J} = {\rm curl}({\bf B})$.
+Of particular interest is the last term in the induction equation. This is a term 
+with negative (magnetic) diffusivity. We interpret it as a term that injects energy
+in to the induction equation. The function ${\bf J}_{\rm ini}$ is a function 
+of only one coordinate ($x$ in the present case) given by 
+\begin{equation}
+{\bf J}_{\rm ini} = \frac{d^2}{dx^2} [\tanh(x)]^2 
+\end{equation}  
+
+Initially both the velocity field and the magnetic fields are taken to be zero. 
+After about one diffusive time, we reach a statistically stationary state. 
+The first thing we want to do is to calculate the reconnection rate. 
+
+A suggestion from <a href="http://arxiv.org/abs/0903.2052">Kowal et al </a>
+to measure the reconnection rate is the following:
+<ol>
+<li> Calculate the line integral of the Electric field 
+\begin{equation}
+{\bf E} = {\bf u}\times {\bf B}
+\end{equation}
+along a closed contour enclosing the reconnection region, in the following
+fashion
+\begin{equation}
+\oint ({\rm sign} B_y){\vec  E}\cdot d{\vec \ell}
+\end{equation}
+In our code we implement it by first calculating line averages of the electric field
+along the $z$ direction. 
+\begin{equation}
+ \langle{\bf E}\rangle_{z} \equiv \int_{L_z} {\vec  E}\cdot d{\vec \ell}
+\end{equation}
+Then the contour integral is given by
+\begin{equation}
+\oint ({\rm sign} B_y){\vec  E}\cdot d{\vec \ell} = \langle{\bf E}\rangle_{z}(-A,0) + \langle{\bf E}\rangle_{z}(A,0) 
+\end{equation}
+</li>
+<li> The reconnection speed is given by 
+\begin{equation}
+V_{\rm rec} \equiv \frac{1}{\mid {\bf B}_{\rm max} \mid} \oint ({\rm sign} B_y){\vec  E}\cdot d{\vec \ell} 
+\end{equation}
+In the movie below we show how our simulation evolves. 
+</ol>
+<div class="youtube_embed">
+  <div class="youtube_mov">
+     <iframe height="100%" width="100%" src="http://www.youtube.com/embed/WQpmeokS8dE"
+              frameborder="0" allowfullscreen></iframe>
+  </div>
+  <div class="youtube_txt">
+  <p>
+In this movie we show four different quantities, in the $x-y$ plane:
+(clockwise from top left)
+(a) $\langle{\bf E}\rangle_{z}$; (b) $\langle B_y \rangle_z$;
+(c) $\langle{\bf E}\rangle_{z}$ (black) , $\langle B_y\rangle_z$ (blue) and 
+$\langle J_z \rangle_z$ (red) as a function of $x$ at $y=0$; and 
+(d) $\langle J_z \rangle_z$. 
+ </p>
+</div>  
+</div>
+<h4> Dimensionaless parameters </h4>
+
+
+To understand energization, let us now look at the dimensionless parameteters of 
+the problem. For the fluid, we solve the isothermal MHD equations which takes
+the following dimensionless form
+ 
+\begin{eqnarray}
+\partial_t (\rho U_i) + {\rm div}(\rho U_iU_j) &=& -\frac{1}{{\rm M}^2}{\rm grad}(p) + 
+      \frac{1}{{\rm Re}}\nabla^2 U_i + \frac{1}{\varepsilon}\frac{1}{{\rm Ma}^2}({\bf J}\times{\bf B}) + {\bf f} \\
+\partial_t \rho + {\rm div}({\bf U}\rho) &=& 0  \\
+c^2_s &=& \gamma \frac{p}{\rho} = 1.\\
+\partial_t {\bf B} &=& {\rm curl}({\bf U}\times{\bf B} -\frac{1}{\varepsilon}\frac{1}{{\rm Re}_{\rm M}} \left[
+        {\bf J} + {\bf J}_{\rm ini} \right] 
+\end{eqnarray}
+where 
+<ol>
+<li> The Mach number: 
+\begin{equation}
+{\rm Ma} = \frac{u_{\rm rms}}{c_{\rm s}}
+\end{equation}
+</li>
+<li> The Alfvenic Mach number: 
+\begin{equation}
+{\rm Ma}_{\rm A} = \frac{u_{\rm rms}}{v_{\rm A}}
+\end{equation}
+</li>
+<li> The  Alfven velocity 
+\begin{equation}
+v_{\rm A} = \frac{B_{\rm max}}{\sqrt{\rho_0\mu_0}}
+\end{equation}
+</li>
+<li> The  Reynolds number 
+\begin{equation}
+{\rm Re} = \frac{u_{\rm rms}L}{\nu }
+\end{equation}
+</li>
+<li> The  magnetic Reynolds number 
+\begin{equation}
+{\rm Re}_{\rm M} = \frac{u_{\rm rms}L}{\eta }
+\end{equation}
+</li>
+</li>
+</ol>
+where $L$ is an integral length of the system, e.g., the length of the current sheet and 
+and $\lambda$ is the width of the current sheet. To non-dimensionalize the current
+we have used
+\begin{equation}
+J \approx \frac{1}{\lambda} B_{\rm max}
+\end{equation} 
+and 
+\begin{equation}
+\varepsilon = \frac{\lambda}{L}
+\end{equation}
+
+The dimensional form of the equation of motion for the charged particles (in the test
+particle approximation) is given by 
+\begin{eqnarray}
+\dot{{\bf x}} &=& {\bf v} \\
+\dot{{\bf v}} &=& \frac{q}{m}\left[ -{\bf u}\times{\bf B}
+                + {\bf v}\times B + \eta {\bf J} \right]
+\end{eqnarray}
+
+Non-dimensional form of this equation looks like: 
+\begin{eqnarray}
+\dot{{\bf x}} &=& \frac{1}{{\rm Ma}}{\bf v} \\
+\dot{{\bf v}} &=& {\rm Lo}\left[ -{\rm Ma}{\bf u}\times{\bf B}
+                + {\bf v}\times B + \frac{{\rm Ma}}{\varepsilon{\rm Re}_{\rm M}}{\bf J} \right]
+\end{eqnarray}
+<ol>
+<li> Where the Lorentz number is 
+\begin{equation}
+{\rm Lo} = \tau_{\rm L}\omega_{\rm c}
+\end{equation}
+</li>
+<li> The integral time scale of turbulence, 
+\begin{equation}
+\tau_{\rm L} = \frac{L}{u_{\rm rms}}
+\end{equation}
+</li>
+<li> The cyclotron frequency, 
+\begin{equation}
+\omega_{\rm c} = \frac{q B_{\rm max}}{m} 
+\end{equation}
+</li>
+<li> We have also assumed that the characteristic scale of the speed of the particles
+is set by the thermal motion, hence 
+\begin{equation}
+\left[ \mid{\bf v}\mid \right] \approx c_{\rm s}
+\end{equation}
+</ol>
+
+In the table below we try to estimate what these dimensionless parameters are 
+in various circumstances. 
+
+<table border="1"> 
+   <tr> 
+       <td> </td>  
+       <td>${\rm Ma}$ </td>  
+       <td>${\rm Ma}_{\rm A}$ </td>  
+       <td>${\rm Re}$ </td>  
+       <td>${\rm Re}_{\rm M}$ </td>  
+       <td>${\rm Lo}$ </td>  
+       <td>$\varepsilon$ </td>  
+   </tr>
+   <tr> 
+       <td> MHD simulations </td>  
+       <td>$\approx 0.1$ </td>  
+       <td>$10$-$0.1$ </td>  
+       <td>$100$-$500$ </td>  
+       <td>$100$-$500$ </td>  
+       <td>${\rm Lo}$ </td>  
+       <td>$\approx 1/6$ </td>  
+   </tr>
+   <tr> 
+       <td> Solar Corona </td>  
+       <td>$\approx 0.1$ </td>  
+       <td>$\approx 0.1$ </td>  
+       <td>$10^6$ </td>  
+       <td>$??$ </td>  
+       <td>$\approx 10^{16}$ (electron) </td>  
+       <td>$??$ </td>  
+   </tr>
+   <tr> 
+       <td> ISM </td>  
+       <td>$??$ </td>  
+       <td>$??$ </td>  
+       <td>$??$ </td>  
+       <td>$??$ </td>  
+       <td>$??$ (electron) </td>  
+       <td>$??$ </td>  
+   </tr>
+   <tr> 
+       <td> Laboratory Plasma </td>  
+       <td>$??$ </td>  
+       <td>$??$ </td>  
+       <td>$??$ </td>  
+       <td>$??$ </td>  
+       <td>$??$ (electron) </td>  
+       <td>$??$ </td>  
+   </tr>
+</table>
+
+The Lorentz number is always huge in astrophysical situation. This implies that simulating
+such a situation in a computer is hopeless. If we resolve the time scale over which the 
+electron/ion makes one gyro-rotation we would never be able to run the simulations
+so long as to meaningfully evolve any turbulent velocity/magnetic field. 
+There are two ways out of this connundrum. One is to choose a much smaller ${\rm Lo}$ 
+somethings of the order of $100$, this is indeed possible. But this would not correspond to 
+any fundamental particle but maybe charged dust. 
+
+<div id="summary">
+The other one, which is the more 
+interesting one is to average the equations over the very short time scale of 
+one-over-gyrofrequency and write effective equations at larger time scales. 
+This would be the guided center approximation. We now need to write down
+the equations of a charged particle in guiding center approximation.    
+</div>
+
+
+
+<h4> Collaobrators </h4>
+This is very much a work in progress, done jointly with Rohit Sharma
+and 
+<a href="http://www.ncra.tifr.res.in/ncra/people/academic/ncra-faculty/Divya%20Oberoi">
+Divya Oberoi</a> at <a href="http://ncra.tifr.res.in/ncra">NCRA, Pune</a>. 
+
+<h4> Computational Resources </h4>
+<p>We use the pencil-code, which is a open-source MPI parallelized solver the partial differential equations (PDEs) that are relevant to fluid and magnetohydrodynamic turbulence. The code shows (weak) linear scaling up to 70, 000 cores. I am one of the core developers of this code. As part of other SNIC projects the code has been ported and ran in abisko.</p> 
+</p>  
+</div>
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Wed Apr 25 22:28:34 CEST 2012 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>

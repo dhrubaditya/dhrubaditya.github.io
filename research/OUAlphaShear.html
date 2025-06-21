@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Research: Alpha-Shear dynamos </title>
+<link href= "../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br/>
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../index.html">Home</a></li>
+    <li id="selected"><a href="./index.html">Research</a></li>
+    <li id="selected"><a href="./OUAlphaShear.html">Dynamos by fluctuations </a></li>
+  </ul>
+</div>
+<div id="lcontent">
+
+<h4>Large-scale dynamos by shear and fluctuating $\alpha$ effect </h4>
+<p> Most astrophysical objects, e.g., the Sun, the Earth, have magnetic fields. 
+The magnetic fields show 
+<a href="https://en.wikipedia.org/wiki/Solar_cycle">fascinating dynamical behavior</a>.
+
+
+<p>  A well-known result in classical physics, the <a href="http://en.wikipedia.org/wiki/Bohr%E2%80%93van_Leeuwen_theorem ">Bohr-van Leeuwen theorem</a>,  
+states that many body systems obeying classical laws of physics cannot 
+be either diamagnetic or paramagentic. There are at least two ways to 
+understand this theorem. </p>
+
+<p> Consider charged particles moving in a domain with random velocities
+and at equilibrium with a thermal bath. Ignore the particle-particle interaction,
+hence the partiition function of the system becomes a product of single particle
+partition functions. The equation of motion of a single charged particle 
+can be written as 
+\begin{eqnarray}
+\dot{{\bf x}} &=& {\bf v} \\
+\dot{{\bf v}} &=& -\gamma_1 ({\bf u} - {\bf v}) + \gamma_2 ({\bf v} \times {\bf B})
+\end{eqnarray} 
+where $\gamma_1 = 6\pi\mu a/m$ and $\gamma_2 = (q/m)$ with $m$ the mass of the particle,
+which is assumed to be a sphere, $a$ its radius, and $q$ its charge. 
+The velocity ${\bf u}$ is the velocity of a the background fluid which constitutes
+the thermal bath, hence it obeys the fluctuation-dissiaption relation. 
+In other words, ${\bf u}$ is a random, Gaussian, delta-correlated in time process  
+with zero mean and its variance given by $k_{\rm B} T$ where $T$ is the temperature
+and $k_{\rm B}$ is the Boltzmann constant. Under the influence of an external magnetic
+field, the charged particles will execute circular motions as shown in the picture below. 
+If we consider one such orbit as sketch inside the domain below we can calculate the 
+magnetic field due to the circular motion of the charged particles by the
+Biot-Savart formula 
+\begin{equation}
+{\bf B}_{\rm in} = \frac{\mu_0}{4\pi} \sum_{{\rm j}=1,N}\frac{q{\bf v}_{\rm j}\times {\hat r}_{\rm j}}{r^3_{\rm j}}
+\end{equation}  
+Here we have ignored relativistic effects (otherwise we would have to use the much more cumbersome Lennert-Wichert potential). As all the particles, irrespective of their initial velocities, move in the same direction (clockwise in the figure below) we get an net contribution to the induced magnetic field ${\bf B}_{\rm in}$ in a direction which is into the plane of 
+the figure. This is opposite to the direction of ${\bf B}$ which is the external 
+imposed magnetic field. Hence we obtain diamagnetism. The fallacy of this argument is 
+realised by looking at the boundary of the domain, which is assumed to be perfectly reflecting. Here, as shown in the figure we get a net currect which is opposite in sign the current induced inside the domain. It can be shown that the magentic field due to this two currents exactly cancel. Hence the induced magnetic field should be zero. Thus classical physics gives neither diamagnetism nor paramagentism. 
+ <div id="myphoto" >
+       <img src="./Bohr_Van_Leewen.png" />
+  </div>
+A beautiful pedagogic discussion from this aspect of the problem can be found in
+the book <a href="https://archive.org/details/SuprisesInTheoreticalPhysics">Surprises in theoretical physics</a> by 
+<a href="http://en.wikipedia.org/wiki/Rudolf_Peierls ">Rudolf Peirls</a>. 
+</p>
+
+<p>
+The second argument is even simpler. It is to notice that magnetic forces do no work. 
+Hence they do not contribute to the Hamiltonian of the system of classical charged 
+particles. At equilibrium, all the statistical properties of the system is determined
+by its partition function which is given by the Gibbs rule, 
+\begin{equation}
+  {\mathcal Z} = \sum_{{\rm all}\;{\rm states}}\exp[-\beta {\mathcal H}]
+\end{equation}
+ As the external magnetic field does not contribute to the hamiltonian ${\mathcal H}$
+ the induced magnetic field must be zero. 
+ This argument is even more powerful because it works even when there is 
+ particle-particle charged interaction. But this works only in  
+ equilbrium systems. A paedagogic discussion from this aspect can be found
+ in <a href="http://www.feynmanlectures.caltech.edu/II_34.html"> Chapter 34 of the second volume of Feynmann Lectures on Physics</a>. 
+</p> 
+
+In recent years an 
+<a href="https://archive.org/details/arxiv-0811.3071">interesting attempt </a>
+has been made to circumvent the first argument
+by putting the particles in the surface of a sphere which has no boundaries.
+Numerical solutions of the system of many particles showed that diamagnetism is possible. 
+But recasting the problem in a Fokker-Planck picture and then solving the Fokker-Planck 
+equation (under assumption of stationarity and some other simplifying ones)
+shows that <a href="http://iopscience.iop.org/0295-5075/89/3/37001/">no 
+diamagnetism is observed</a>. 
+A more <a href="http://journals.aps.org/pre/abstract/10.1103/PhysRevE.85.011114">recent work</a> on this problem 
+by <a href="http://rri.res.in/htmls/library/imprints_collection/bios/nkumar.html">N. Kumar</a> 
+has demonstrated an interesting asepct.  In this work, Kumar 
+has assumed that the charged particles violate fluctuation-dissipation relation. 
+Insted of assuming a delta-correlated velocity, he added to it a correlted part (in time)
+and showed that diamagnetism and paramagnetism are both possible if fluctuation-dissipation
+realtion is not true. This begs the question, what happens if ${\bf u}$ is 
+a turbulent solution of the Navier-Stokes equation ?  
+</p>
+
+<p> In that case we solve the following set of equations:
+\begin{eqnarray}
+\partial_t {\bf u} + {\bf u}\cdot\nabla{\bf u} &=& \nu\nabla^2{\bf u} -\nabla p + {\bf J}\times{\bf B} + {\bf f}\\
+\nabla\cdot{\bf u} &=& 0 \\
+\partial_t {\bf B} &=& \nabla\times\left({\bf u}\times{\bf B} - \eta{\bf J} \right)
+\end{eqnarray}
+in a periodic box. Where $\rho = 1$ and $\mu_0 = 1$ has been assumed, and 
+${\bf J} = \nabla\times{\bf B}$. The external force ${\bf f}$ is assumed to be 
+non-helical limited to small wave-numbers.  
+In addition to the equations of the charged particles written down before. 
+The numerical problem then is to calculate the induced magnetic field, as given by the
+Biot-Savart formula, once the system of particles have reached statistically stationary state. Whether we obtain diamagnetism or paramagnetism or neither is the main question. 
+</p>
+
+<p> Note here, that the velocity field ${\bf u}$ no longer satisfies the fluctuation-dissipation relation, 
+so if Kumar's latest results apply here we would obtain diamagnetism (or paramagnetism). 
+If we assume (as is reasonable) that the system of charged particles reach a statistically 
+stationary state then the question of dia (or para) magnetism is that the
+following quantity, 
+\begin{equation}
+{\bf M}_{\rm in} \equiv \int \frac{{\bf v}\times\hat{r}}{r^3} \mathcal{P}({\bf r},{\bf v}) d^drd^dv
+\end{equation} 
+is zero, positive or negative. The probability distribution function in phase space,
+$\mathcal{P}({\bf r},{\bf v})$, is the quantity of interest. 
+</p>
+
+<p> A different quantity is the PDF of two particle distribution in phase space,
+$\mathcal{P}_2({\bf r}_1,{\bf r}_2,{\bf v}_1,{\bf v}_2)$ which is the joint 
+probability to find a two charged particles $1$ and $2$ at specific points in phase
+space. The particle-particle correlation function in real space, 
+\begin{equation}
+\Phi_2({\bf r}_1,{\bf r}_2) \equiv \int \mathcal{P}_2d^dv_1d^dv_2
+\end{equation}
+should be a function of $\ell \equiv \mid{\bf r}_1 - {\bf r}_2 \mid$ alone due to 
+homogeneity and isotropy in the absence of the external magnetic field. 
+This is the quantity that has been calculated by <a href="http://arxiv.org/abs/0902.3212">H. Homann, J. Bec, H. Fichtner,
+and  R. Grauer</a> to 
+study clustering and shown to behave like, 
+\begin{equation}
+\Phi_2(\ell) \sim \ell^{D_2}
+\end{equation}
+with $D_2$ as a function of the Stokes number (${\rm St} \equiv \gamma_1 \tau_{\rm K}$)
+is shown in Figure 5 of their paper.
+
+<p> To begin with we should calculate the following quantities:
+<ol>
+  <li> Add external magnetic field to the spectral code. In our spectral code, this
+       may be calculated in the following manner. In the equation for the magnetic
+       field the cross-product ${\bf u} \times {\bf B}$ is calculated in real space.
+       It is best to add a constant magnetic field the transformed-to-real-space ${\bf B}$
+       at this point. Similarly, one should add the same constant magnetic field to the 
+       magnetic field in the term ${\bf J}\times{\bf B}$ at the same time. While
+       calculating the trajectories of the charged particles one must add the same magnetic
+       field. In other words, as soon as the magnetic field is transformed to real space
+       add a constant part to it. Before fourier transforming to Fourier space, this 
+       constant component may even be subtracted out.  
+  <li>  Let them reach a non-equilibrium 
+      statistically stationary state (NESS). It is possibly best to use 
+      exactly the same dimensionless parameters as used by Homann et al.   
+  <li> The PDF of speeds. This would presumably be Maxwellian. In the presence of
+       of the external magnetic field, the three compoments of velocities may have 
+       different distribution. In that case we should calculate the in-plane and
+       parallel to the magnetic field PDFs. 
+   <li> The auto-correlation function of ${\bf u}$ as sampled by the charged particles. 
+        Kumar's work assumes that it would have exponential in time behavior. 
+   <li> The induced magnetic moment. Once we get a value, we should reverse the magnetic
+         field and see if we see an exactly opposite value. Can we understand the 
+         diamagnetism in terms of Kumar's work.  
+    <li> How does this induced magnetic field (if it is non-zero) depend on the 
+         clustering ?  
+</ol>
+</p> 
+<h5> Computational Resources </h5>
+<p>
+</p>
+</div>
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Wed Apr 25 22:28:34 CEST 2012 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>

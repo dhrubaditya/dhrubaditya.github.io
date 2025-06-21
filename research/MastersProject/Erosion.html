@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Erosion by flow</title>
+<link href= "../../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../index.html">Home</a></li>
+    <li id="selected"><a href="./index.html">Research</a></li>
+    <li id="selected"><a href="./Erosion.html">Erosion</a></li>
+  </ul>
+</div>
+<div id="lcontent">
+
+<h3>Understanding erosion by flows </h3>
+  <p> Erosion by flows is a commonly seen natural phenomenon.
+  This happens on many different length scales. At large length scales
+  one sees the effects of erosion by rivers. This is an intriguing
+  geological phenomenon. The landscape is eroded by the river, which
+  in turn can change the path of the river itself. This
+  interconnectedness between boundaries and the flow is an essential
+  aspect of erosion. </p>
+  
+<p> The problem manifests itself at different scales. If you consider
+  river banks or even coastlines, you find that they are not simple
+  shapes. A coastline typically has multifractal shape. That is the
+  reason why measuring coastlines (or borders between countries) is
+  nontrivial, see, e.g.,
+  <a> <href="https://en.wikipedia.org/wiki/Coastline_paradox">
+  the article in Wikipedia on coastline paradox
+  and the references therein</a>. This was first pointed out by
+  <a href="https://en.wikipedia.org/wiki/Lewis_Fry_Richardson">L.F. Richardson</a> and was later popularized by
+  <a href="https://en.wikipedia.org/wiki/Benoit_Mandelbrot">B.B. Mandelbrot</a> in his
+  famous article
+  <a href="http://users.math.yale.edu/~bbm3/web_pdfs/howLongIsTheCoastOfBritain.pdf">"How
+  long is the coast of Britain?"</a>. So at certain length scales the
+  surface which develops as a result of erosion can be quite
+  complex. But you look at pebbles in a beach they have quite a smooth
+  surface although they have have quite sharp angles. </p>
+
+  <p> When faced with such complex problems, physicists start by
+  looking for
+  <a href="http://quoteinvestigator.com/2011/05/13/einstein-simple/">
+  "simple but not simpler approach"</a>.  Consider a clay ball dipped
+  in a flow and watch how it erodes. Exactly
+  <a href="http://www.math.nyu.edu/faculty/shelley/papers/RMCSZ2012.pdf">this
+  experiment</a> was performed by a group of applied mathematicians at
+  the Courant Institute in New York. The first thing they notice is
+  that the boundary of the clay ball changes very slowly compared to
+  the flow velocities, as is observed in geological problems. This
+separation of time-scales will play a crucial role in our treatment
+of this problem. A summary of their results is: </p>
+<ol>
+  <li> The rate of erosion is proportional to the local wall-stress.
+  <li> After a short time, the shape of the eroded body becomes
+  self-similar.
+  <li> Sharp corners can develop, particularly at stagnation points of
+  the flow. 
+</ol>
+
+<p> Taking this experiment as our inspiration, we would like to start
+with a numerical experiment. Consider a two dimensional flow
+problem. A circle (a cylinder in three dimensions) in a cross-flow
+as shown in the figure below: <p>
+ <div id="myphoto" >
+       <img src="./erosion_sketch.png" />
+  </div>
+<p> We expect that due to the wall-stress on the boundary material in
+the circle are going to erode away. This erosion will change the
+boundary of the solid object, the circle will possibly not remain a
+circle. Hence we need a computational method that can deal with
+boundaries that are not regular shape. In addition, we need to deal
+with a dynamical boundary, but we are going to simplify the problem by
+virtue of the separation of the time scales; as I suggest below: </p> 
+
+<p> Let us use a two-dimensional lattice Boltzmann code (LBM) to solve
+this problem. Let us parametrise the boundary by a arc-length
+variable $s$. So the closed boundary implies that $s$ is periodic.
+We assume that the rate of erosion from the surface is proportional to
+the wall-stress, so the mass loss over a time $\tau$ is given by
+\begin{equation}
+\Delta M(s,\tau) \equiv \int_0^{\tau} \sigma_{\rm wall}(s,t) dt
+\end{equation}
+We need to assume $\tau$ to be neither to small or too large. Then we
+run the code for time $\tau$ and calculate the mass-loss. We use this
+mass-loss to deduce a new boundary. Then run the simulations again
+with this new boundary. How does various shapes erode under this
+method ? I expect that the shape is going to be more like a peeble
+(smooth with sharp corners) than a multifractal surface. </p>
+
+<p> In addition to erosion, we can also use to same idea to deal with 
+deposition. For example, we could introduce heavy inertial particles in the problem. 
+Some of these particles would hit the cylinder and depending on the coefficient of 
+resitution between the cylinder and the particles they can stick. We can again wait for
+time $\tau$ and calculate $\Delta M(s,\tau)$ with contributions from both deposition and 
+erosion. </p>
+
+<p> The problem is also interesting from astrophysical point of view. The central 
+object could be a kilometer-sized planetesimal in a protoplanetary disk. 
+Would the erosion favours certain shapes and also selects 
+sizes larger than certain sizes (e.g., smaller objects are eroded away) ?  </p>
+
+<p> The problem could then continued to 3 dimensions. The possibilities are endless. </p> 
+
+<p> Collaborations: The problem has been designed by myself (Dhrubaditya Mitra, NORDITA) and 
+Anders Johansen from the Lund Observatory. 
+</p>
+</div>
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Thu May  4 14:00:50 CEST 2017 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>
