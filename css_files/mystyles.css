@@ -110,7 +110,7 @@ border: 8px solid orange;
 #content #myphoto{
  float:left;
  border: 2px solid black;
- padding:16px;
+<! padding:16px;>
  height:220px;
 }
 #content #text{
