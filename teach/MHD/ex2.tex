@@ -1,0 +1,110 @@
+
+\documentclass[a4paper,twoside,10pt]{article}
+
+\usepackage{amsfonts,enumerate,bm,color,graphicx}
+\input{symdef.inc}
+\setlength{\textheight}{24cm}
+\setlength{\textwidth}{14cm}
+\setlength{\topmargin}{-1.5cm}
+\setlength{\oddsidemargin}{0.5cm}
+\setlength{\evensidemargin}{-0.5cm}
+\pagestyle{empty}
+
+
+\begin{document}
+
+%--- CUSTOMIZATION COMMANDS ---%
+
+\newenvironment{itmz}%
+{ \vspace{-\parskip} \begin{itemize} }%
+{ \end{itemize} }
+\def\flux{{\cal F}_\nu}
+
+%--- TITLE ---%
+
+\begin{center}
+  {\Large \bf
+   Astrophysical MHD ( AS7019)\\[2mm]
+   Homework II} \\[4mm]
+To be returned on Thursday 15th of February 
+\end{center}
+All the problem carry 25 marks.  
+\bigskip
+
+%--- PROBLEMS ---%
+
+
+
+\begin {enumerate}
+
+\item Solution of Stokes flow around a sphere. 
+%-----------------------------------
+\begin{figure}[h]
+\includegraphics[width=0.6\columnwidth]{fig/StokesProblem.png}
+\caption{\small{A solid sphere in a flow. At large distance from the sphere
+  the flow is give by a constant velocity $\VV$. The radius of the
+  sphere is unity. The vector $\rr$ is the vector to any point in
+  space with the center of the sphere as origin. }
+}\label{fig:st}
+\end{figure}
+%-----------------------------------
+Continuing from where we left off in class show that 
+\begin{equation}
+\chi(r) = \frac{1}{4}r^2 + Ar + \frac{B}{r}
+\end{equation}
+is a solution of the biharmonic equation
+\begin{equation}
+\biharmonic \chi = 0 
+\end{equation}
+where $r$ is the radian coordinate in spherical polar coordinate
+system. $A$ and $B$ must be chosen such that 
+\begin{equation}
+u_{\alpha} = U_{\alpha\beta}u_{\beta} 
+\end{equation}
+with 
+\begin{equation}
+U_{\alpha\beta} = \delta_{\alpha\beta}\lap \chi - \frac{\partial^2 \chi}{\partial
+  x_{\alpha}\partial x_{\beta}}
+\end{equation}
+must be zero at $r=1$. This implies imposition of no-slip boundary
+conditions as all components of velocity goes to zero at the boundary
+of the sphere whose radius is assumed to be unity. 
+Show that this boundary condition implies 
+\begin{equation}
+\chi^{\prime\prime}(1) = \chi^{\prime}(1) = 0  
+\end{equation}
+From this show that 
+$B={\textstyle{1\over 4}}$ and
+$A={\textstyle{3\over 4}}$.
+The show that for $r > 1$ 
+\begin{equation}
+u_{\alpha} = V_{\alpha} - \frac{3}{4}\left(
+  \frac{V_{\beta}r_{\beta}r_{\alpha}}{r^3} + \frac{V_{\alpha}}{r}
+    \right)
+-\frac{1}{4}\frac{\partial}{\partial x_{\alpha}}\left( \frac{V_{\beta}r_{\beta}}{r^3}\right)
+\end{equation}
+
+\item Write down the equations of isothermal MHD and then
+  non-dimensionalize the equations. Assume that there is a
+  characteristic length scale $\ell = \frac{1}{\kf}$, velocity scale
+  $u$, constant sound-speed $\cs$, a magnetic field of magnitude
+  $B_{0}$, and a constant background density $\rho_{0}$. Show that the
+  non-dimensionalized equations have the following dimensionless
+  parameters:
+\begin{itemize}
+\item Reynolds number : $\Rey = \frac{u}{\nu\kf}$, 
+\item magnetic Reynolds number: $ \Rm = \frac{u}{\eta\kf}$, 
+\item Mach number: $\Ma =\frac{u}{\cs}$, 
+\item Alfvenic Mach number: $\MaA = \frac{u}{\cA}$,
+\end{itemize}
+where $\cA = \frac{B_{0}}{\rho_{0}\mu_{0}}$.
+
+\item Work out the solution of the solar wind problem assuming the
+  flow is isentropic (adiabatic) instead of the isothermal assumption
+  made in class. 
+\item Functional methods: Among all the curves joining two given
+  points $(x_{0},y_{0})$ and $(x_{1},y_{1})$, find the one which
+  generates the surface of minimum area when rotated about the $x$-axis. 
+\end{enumerate}
+\end{document}
+

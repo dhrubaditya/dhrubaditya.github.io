@@ -1,0 +1,175 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tufte-Style Book (Documentation Template)
+% LaTeX Template
+% Version 1.0 (5/1/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% The Tufte-LaTeX Developers (tufte-latex.googlecode.com)
+%
+% License:
+% Apache License (Version 2.0)
+%
+% IMPORTANT NOTE:
+% In addition to running BibTeX to compile the reference list from the .bib
+% file, you will need to run MakeIndex to compile the index at the end of the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{tufte-book} % Use the tufte-book class which in turn uses the tufte-common class
+\input{tufte.inc}
+\input{symdef.inc}
+
+
+%----------------------------------------------------------------------------------------
+%	BOOK META-INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Introduction to Fluid Mechanics} % Title of the book
+
+\author[]{Dhrubaditya Mitra} % Author
+
+\publisher{} % Publisher
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\frontmatter
+%----------------------------------------------------------------------------------------
+%	EPIGRAPH
+%----------------------------------------------------------------------------------------
+\thispagestyle{empty}
+\openepigraph{Perhaps the fundamental equation that describes the swirling nebulae and the
+condensing, revolving, and exploding stars and galaxies is just the 
+simple equation for hydrodynamic behavior of nearly pure hydrogen gas}{R.P. Feynman, 
+{\itshape "Flow of Wet Water"}}
+\vfill
+%----------------------------------------------------------------------------------------
+\maketitle % Print the title page
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+\newpage
+\begin{fullwidth}
+~\vfill
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+Copyright \copyright\ \the\year\ \thanklessauthor
+\par\smallcaps{Published by \thanklesspublisher}
+\par\smallcaps{tufte-latex.googlecode.com}
+
+\par Licensed under the Apache License, Version 2.0 (the ``License''); you may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://www.apache.org/licenses/LICENSE-2.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \smallcaps{``AS IS'' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\index{license}
+\par\textit{First printing, \monthyear}
+\end{fullwidth}
+%----------------------------------------------------------------------------------------
+\tableofcontents % Print the table of contents
+%----------------------------------------------------------------------------------------
+%\listoffigures % Print a list of figures
+%----------------------------------------------------------------------------------------
+%\listoftables % Print a list of tables
+%----------------------------------------------------------------------------------------
+%	DEDICATION PAGE
+%----------------------------------------------------------------------------------------
+%\cleardoublepage
+%~\vfill
+%\begin{doublespace}
+%\noindent\fontsize{18}{22}\selectfont\itshape
+%\nohyphenation
+%Dedicated to those who appreciate \LaTeX{} and the work of \mbox{Edward R.~Tufte} and \mbox{Donald E.~Knuth}.
+%\end{doublespace}
+%\vfill
+%\vfill
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\cleardoublepage
+
+%This sample book discusses the design of Edward Tufte's books\cite{Tufte2001,Tufte1990,Tufte1997,Tufte2006} and the use of the \doccls{tufte-book} and \doccls{tufte-handout} document classes.
+
+%----------------------------------------------------------------------------------------
+
+\mainmatter
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\input{Kinm/kinematics}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\input{HydroStatics/hydrostatics}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\include{DryWater/drywater1}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\include{DryWater/drywater2}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\include{DryWater/drywater3}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\include{Visc/viscosity}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\include{Visc/VFlow}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\include{Visc/Cflow}
+\include{Visc/Sedimentation}
+\include{Visc/Suspension}
+%----------------------------------------------------------------------------------------
+\include{Act4/Scene1_LinStability}
+%----------------------------------------------------------------------------------------
+\include{BoundaryLayer/boundary}
+\include{BoundaryLayer/drag}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%\include{Act4/Scene2_BeyondLinStability}
+% ----------------------------------------------------------------------------------------
+%\include{Act5/Scene1_TurbulentDiffusion}
+% ----------------------------------------------------------------------------------------
+%\include{Act5/Scene2_Kolmogorov}
+% ----------------------------------------------------------------------------------------
+\include{Surface/Surface}
+\include{Act6/Epilogue}
+\include{Math/Uniq}
+%\section{Mixing}
+%\section{Swimming}
+%\subsection{Life at low Reynolds number}
+%\section{Active Matter: an invitation}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	CHAPTER 10
+%----------------------------------------------------------------------------------------
+%\chapter{Boundary layer theory}
+%\subsection{Drag and Lift}
+%\subsection{How aeroplanes fly ?}
+%----------------------------------------------------------------------------------------
+%	CHAPTER 11
+%----------------------------------------------------------------------------------------
+%\chapter{Flows at different Reynolds number}
+%\subsection{Von Karman vortex street}
+%----------------------------------------------------------------------------------------
+%\chapter{Potential flows}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\backmatter
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\bibliography{turb_ref,sunref} % Use the bibliography.bib file for the bibliography
+\bibliographystyle{plainnat} % Use the plainnat style of referencing
+
+%----------------------------------------------------------------------------------------
+\printindex % Print the index at the very end of the document
+
+\end{document}

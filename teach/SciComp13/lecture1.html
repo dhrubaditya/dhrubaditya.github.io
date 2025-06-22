@@ -1,0 +1,810 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Scicomp13: Lecture 1  </title>
+<link href= "../../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../../index.html">Home</a></li>
+    <li ><a href="../index.html">Teaching</a></li>
+    <li ><a href="./index.html">Scicomp13</a></li>
+    <li id="selected"><a href="./lecture1.html">Lecture 1</a></li>
+  </ul>
+</div>
+
+<div id="lcontent">
+<div class="eachitem">
+<h3> Lecture 1  </h3>
+<div id="summary">
+integers and floats -- precision and its loss -- solution of quadratic equations -- 
+iterations and convergence -- finding roots of polynomials -- roots of polynomials and iterative maps 
+-- period-doubling route to chaos  
+</div>
+<p> 
+Scientific computing is a vast field that now has influence on all branches of science. 
+This has also been a very rapidly developing field. Doing justice to such a field in a 
+short introductory course is impossible. Hence I shall define scientific computing 
+very narrowly. These are broadly divided into two types of
+computations: </p>
+<ul>
+  <li> Numerical computations
+  <li> Symbolic computations
+</ul>
+<p>The first one deals with numbers the second one deals with symbols.
+You may have already come across the most common example of symbolic computation software, mathematica.
+Symbolic computation is often build on a programming paradigm called <font style=oblique> functional programming </font>,
+where one does not deal with data but functions. This technique is closer to mathematical operations, and
+has been projected one of the techniques that are going to be more and more important as our programs
+become more and more complex. Of course, functional programming is not limited to symbolic computations.
+If you are interested to know what functional programming is and why it is of interest, you might start
+by trying out functional programming in python. </p>
+<p> In this course we shall stay clear off both functional programming and symbolic computations.
+We shall be knee-deep in numbers. Our choice of language is fortran 90.  Although, strictly-speaking,
+a language has nothing to do with the computations we do, our choice of language does set
+constrains on the programs we write and eventually even on the way we think.  We have chosen fortran because
+it is still the most commonly used language in academic scientific community, although C++ has by now made
+quite an inroad. In the rest of this course, unless otherwise stated, fortran will mean fortran 90, neither fortran
+77 (god forbid) nor fortran 2000. </p>
+<p> There are three principal aims of this course:
+<ul>
+  <li> To introduce you to a few basic techniques of numerical computations which, in my opinion, every graduate student
+       in physics should know. Of course, the choice of topic is colored by my own biased viewpoint.
+  <li> To introduce you to the topic of analysis of algorithms, and to make you appreciate that numerical computations must be done
+       with great care.
+  <li> To teach you how to write your programs is a structured systematic way. 
+</ul>
+The aim of this course is not to teach you fortran. Without any further ado let us try to start writing short programs.
+In fortran (as in many other languages) a program must always have a well-define start and an end. These are given
+by:
+<div class="code">
+<pre><code>
+!******************************
+program  
+</pre></code>
+</div>
+and
+<div class="code">
+<pre><code>
+endprogram 
+</pre></code>
+</div>
+The character "bang", i.e., "!" is a comment character in fortran. It can appear in any line of your program,
+the characters appearing after it are ignored by the compiler. This brings us to the fact that fortran needs
+a compiler, i.e., an interpreter program which translates the code you write in fortran to another language that
+the computer understands, which we shall call "machine language".
+But fortran is not called an "interpreted language", a name that is reserved for
+languages where every line you write is immediately translated to machine language and <font style=italics> executed </font>.
+Examples of such interpreted languages are python, java and BASIC. Fortran is a "compiled language", the intrepretar program
+called "compiler" generates an "executable" out of your fortran code. It is this executable that the computer understands.
+By default the name given to the executable by the compiler is often <code>a.out </code> .
+
+<h4> Integers </h4>
+
+Let us continue by writing a program to add two integers:
+<div class="code">
+<pre><code>
+!******************************
+program add_integers
+implicit none
+integer :: i,j,k
+
+endprogram
+!******************************
+</pre></code>
+</div>
+<p> Here we have first added a "declaration" that <code>i</code>, <code>j</code> and <code>k</code> are integers.
+Historically this was not necessary in fortran. There 
+was an implicit convection that a variable name which started with the
+letter <code>i,j,k</code> (and some others which I dont care to remember)
+are integers, others were real numbers. We shall <font style=italics> never</font> use 
+such convention but due to a mistaken respect for backward-compatiability
+fortran compilers still use this convention. But you can rule that out
+by saying, in the second line of your program, the statement
+<code>implicit none</code>.
+I strongly recommend that you use this in every piece of fortran code
+that you write. </p>
+
+<p> Note that we have declared the integers but we have not yet given them any value.
+A good compiler initializes all variables with "zero". Although in some
+cases even this may not be desiarable. As a good programming practice always initialize the variables you use.
+To check what your compiler does write out the integers by adding a <code>write</code> statement to our code:
+<div class="code">
+<pre><code>
+!******************************
+program add_integers
+implicit none
+integer :: i,j,k
+write(*,*) 'i,j,k', i,j,k
+endprogram
+!******************************
+</pre></code>
+</div>
+In my mac with gfortran I get the output,
+<div class="code">
+<pre><code>
+ > ./a.out
+ i,j,k           1   222093376       32767
+
+> ./a.out
+ i,j,k           1    76013632       32767
+
+> ./a.out
+ i,j,k           1   245846080       32767
+</pre></code>
+</div>
+
+<p>Clearly in my computer these integers are initialized to random integers. And each time I run my code I get a different
+set of random integers. By the way, this is not a good way to actually generate random integers. So the first lesson of
+today is to always initialize.  This turns our code to </p>
+<div class="code">
+<pre><code>
+!******************************
+program add_integers
+implicit none
+integer :: i=10,j=5,k=0
+write(*,*) 'i,j,k', i,j,k
+k=i+j
+write(*,*) 'i,j,k=i+j', i,j,k
+endprogram
+!******************************
+</pre></code>
+</div>
+
+<h5>Class Exercises</h5>
+<ol>
+<li> Some compilers comes with the option of initializing all the integers
+in the code with a fixed value that you can set. For example gfortran comes
+with the option <code> -finit-integer=n</code>. Use this option with the first
+version of the program <code>add_integers</code> to initialize <code>i</code> and
+<code>i</code> to any value you want. 
+<li> Integer arithmatic: In fortran the basic arithmatic operations are
+<div class="code">
+<pre><code>
+!addition
+k=j+j
+!subtraction
+k=i-j
+!multiplication
+k=i*j
+!division
+k=i/j
+!exponentiation
+k=i**j
+</pre></code>
+</div>
+Write a small code that does all these operations and write the result. 
+Then experiment with this code to see how large an integer you can represent. 
+Can you guess how large this value will be ? 
+If you want bigger integers you can use the definition
+<div class="code">
+<pre><code>
+integer(8)
+</pre></code>
+</div>
+or in the old style (still followed by some compilers)
+<div class="code">
+<pre><code>
+integer*8
+</pre></code>
+</div>
+
+<li> <font color="dark-violet"> Integer division</font>: Note that in the division above when you divide
+2 by 3 you do not get a fraction but 0. Can you think of interesting
+use of this idea ?
+
+<li> <font color="dark-violet"> modulo function</font>: In fortran implemented by the command
+<div class="code">
+<pre><code>
+k=mod(i,j)
+!or
+k=modulo(i,j)
+</pre></code>
+</div>
+The two definitions are the same for positive $i$ and $j$, v.i.z.,
+\begin{equation}
+k=i-\lfloor\frac{i}{j}\rfloor
+\end{equation}
+But for negative values of $i$ or $j$ the convention is 
+that in the former case $k$ has the same sign as $i$ and
+in the latter case it has the same sign as $j$. 
+Write a code that calculates the modulo function and check that
+the above is true. 
+</ol>
+
+<h4> Greatest Common Divisor </h4>
+
+<p> Euclid's algorithm. Start with two integer $x$ and $y$ with $x < y$. Obtain reminder of
+division. If the reminder is zero you have found the gcf. If not continue. In this
+fashion go down to one. In that case 1 is the gcd. </p> 
+
+<h4>Short history of "Algorithm" </h4>
+
+<h4> Real Numbers </h4>
+
+<p>Any computations that you do in a computer with integers is the cleanest computation you can do.
+This you shall appreciate when I describe how computers deal with real numbers. </p> 
+
+<p> In a computer we must use finite number of memory to store a number.
+Of course, this limits the largest (absolute) integer you can store. But smaller integers
+are stored exactly. Not so in the case of real numbers. 
+One of the ways, rather the most common way, real number
+arithmatic is done in a computer is by representating them by
+floating points. For example the number $1/10$ has <font color="magenta"> a</font>
+floating point representation as $1.00\times10^{-1}$. This particular 
+floating point representation uses three digits and one exponent. 
+In general the representation may look like, 
+\begin{equation}
+\pm d_{0}.d_1d_2\ldots d_{p-1}\times b^{e}
+\end{equation}
+where we use a representation with $p$ ``significands'' or
+significant digits, base $b$ and exponent $e$. The representation
+has the following properties:
+<ol>
+<li> First there must necessarily be a maximum and minimum value of $e$,
+$e_{\rm min}$ and $e_{\rm max}$ this determines what is the biggest and
+the smallest number we can represent. 
+<li> Next and more importantly you must realise that for any base $b$ 
+there exists (rational) number which requires infinite number of significant digits.
+For example the number $1/3$ needs infinite number of digits in base $10$.
+Hence in base $10$ for any finite number $p$, $1/3$ always lies
+between two floating points.  
+<li> Note also that the floating point representation of a number is not
+even unique. The number $1/10$ can, for example, be represented in two different ways
+$1.00E-1$ and $0.01E0$ in the floating point representation with $b=10$ and
+$p=3$. If we demand that the leading digit will be nonzero then we have
+what is called a {\it normalized} representation which is unique.
+Unfortunately that implies that you cannot store $0$ in such a system.    
+An obvious way to store zero is as $1.0Ee_{min}-1$. Hence if we have $k$
+bits to store the exponents, only $2^k-1$ values of the exponent are possible. 
+</ol>
+
+<p> Due to (2) above most real numbers when represented by floating point
+number will have an error. This process of constructing floating point
+numbers from real number is called <font color="magneta"> rounding</font> or <font color="magenta"> rounding off</font>. 
+The error is called <font color="magneta"> rounding error </font>. Let us say we want to use 
+a floating point representation with 
+$p=3$, $b=10$, $e_{\rm max}=2$ and $e_{min}=-2$. We shall use this
+representation to illustrate several important issues in floating 
+point arithmatic. Now let us try to represent the number $0.3141$ in this
+system. The floating point representation will be $3.14E-1$. The 
+rounding error is $0.0001$. So the {\it relative} rounding error is
+$\frac{0.0001}{0.3141} \approx 0.00031 $ A different way of writing
+the same error is to say that it is $0.1$ {\it units in last place},
+or in short ${\tt ulp}$. In terms of this unit, the maximum rounding
+error is $0.5 {\tt ulp}$.   </p>
+
+<p> <b> Theorem 1 </b>The relative error and the ${\tt ulp}$ are related by
+\begin{equation}
+\frac{1}{2}b^{-p} \leq \frac{1}{2} {\tt ulp} \leq \frac{b}{2}b^{-p}
+\end{equation}
+where we are using a system of floating point representation with
+base $b$ and number of significant digits to be $p$.  </p>
+
+<p> This implies that an error that is fixed in ${\tt ulp}$ can vary by
+a factor of $b$. This factor is called <font color="magenta"> wobble</font>.
+Note that the maximum rounding error is always less a relative error of 
+$\varepsilon = \frac{b}{2}b^{-p}$. This number is called the 
+<font color="magenta"> machine precision</font>. The relative error of a calculation
+is often given in units of $\varepsilon$. </p>
+
+<p> <b> Theorem 2</b> For a floating point representation with base $b$ and
+number of significant digits $p$ the relative error can be as large
+as $b -1$. </p>
+
+<p> The error we have noted so far comes merely from the
+floating-point representation of real number. But arithmatic of floating point
+numbers can magnify the error by huge amounts.
+The basic unit of arithmatic is addition.
+An addition in floating point is done by moving the decimal point till
+both the numbers being added have the same $e$. Then they are added. 
+For example let us add $3.75E2$ to $1.45E-1$.
+The addition will proceed as follows. 
+\begin{eqnarray}
+3.75 {\rm E} 2 \nonumber \\
++1.45 {\rm E} -1 = 0.00145 {\rm E} 2 \approx 0.00 {\rm E} 2 \nonumber \\
+3.75 {\rm E} 2 
+\end{eqnarray}
+Whereas the actual number would be $3.75145$ which when rounded off to 
+three significant digits will be exactly $3.75$.</p>
+
+<p> Now consider the following subtraction. Find $x-y$ where $x=10.1$ and
+$y=9.95$. The actual answer is $0.15$. In floating point operations
+\begin{eqnarray}
+x=10.1 \approx 1.01E1 \nonumber \\
+y=9.95\approx 0.99E1 \nonumber \\
+x-y\approx 0.02E1
+\end{eqnarray}
+The correct answer is $0.15$, so error is $50 {\tt ulp}$ and wrong in every digit ! </p>
+
+<p> Now let us look at a slightly improved method of subtraction. In this
+method the smaller number is rounded off with one more digit. And
+the result of the subtraction is rounded off the the usual number of
+digits. Let us see what happens in exactly the same problem:
+\begin{eqnarray}
+x=10.1 \approx 1.01 E1 \nonumber \\
+y=9.95\approx  0.995E1 \nonumber \\
+x-y\approx  0.015 = 1.5E-2
+\end{eqnarray}
+In this case the answer is exact ! The answer being exact is a lucky
+break, but in generaly by adding of one extra digit,
+called the guard digit, the accuracy in subtraction can be
+vastly improved. </b>
+
+<p> <b> Theorem 3</b> If $x$ and $y$ are two floating-point numbers with base
+$b$ and number of significant digits $p$, and if the subtraction is
+done with a guard digit ($p+1$ digits) the relative rounding
+error is less than $2\varepsilon$. </p>
+
+<p> In other words the guard digits is useful when subtracting two
+numbers which are almost equal to each other. But the guard digit
+unfortunately is not a magic bullet. If the two numbers themselves
+are results of other floating point operations, then the guard digit
+will not help. To illustrate let us look at the roots of 
+quadratic equation,
+\begin{equation}
+ax^2+bx+c = 0 
+\label{eq:quadratic}
+\end{equation}
+The solutions of which is,
+\begin{equation}
+x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}
+\label{eq:root_quadratic}
+\end{equation}
+Let us take $a=0.08$,$b=2.75$ and $c=23.43$. In this case we have
+\begin{eqnarray}
+b^2 = 7.5625 \nonumber \\
+ac = 1.8744  \nonumber \\
+4ac = 7.4976  \nonumber \\
+b^2-4ac = 0.0624  \nonumber \\
+\sqrt{b^2-4ac} = 0.24979  \nonumber \\
+x_1,x_2 = -2.500, -2.999.  
+\end{eqnarray}
+</p>
+
+<p> Let us see what we get by floating-point operations, 
+\begin{eqnarray}
+a \approx 8.00E-2 \nonumber \\
+b \approx 2.75E1  \nonumber \\
+c \approx 2.34E2  \nonumber \\
+b^2 \approx 7.56E1  \nonumber \\
+ac \approx 1.87E1  \nonumber \\
+4ac \approx 7.48E1  \nonumber \\
+b^2 - 4ac \approx 8.00E-1  \nonumber \\
+\sqrt{b^2 - 4ac} \approx 8.94E-1  \nonumber \\
+x_1,x_2 = 1.86E1, 3.64E1  
+\end{eqnarray}
+So the error is $0.894-0.25 = 0.64$ which is $64 {\tt ulp}$. Note that
+in this process the actual subtration of $4ac$ from $b^2$ (once each
+of them were used in their floating point representation) was exact. 
+Using guard digits would not have improved this calculation at all. </p> 
+
+
+Here the subtraction has merely brought fourth the error which
+were already inherent in the two terms that were subtracted, such a
+subtraction can potentiall remove most of the accurate digits to
+disappear and to keep merely the error from previous floating point
+operations. This is termed <font color="magenta">catastropic cancellation</font>. 
+Problems such as these must be dealt with in a case-by-case basis.
+
+<h5>Class exercise:</h5>
+
+<p> For two floating point numbers $x$ and $y$ which of the two following methods are better
+to calculate $x^2$-$y^2$ ?
+<oi>
+<li> Calculate the squares first and then subtract them.
+<li> calculate by using the formula $(x+y)(x-y)$
+</oi>
+</p>
+
+<p> Let us now take this example of the quadradic formula as an excuse to study
+solution of quadratic equations. 
+The equation to solve is 
+\begin{equation}
+0.08x^2 + 2.75x + 23.43 = 0
+\end{equation}
+Consider this equation as a linear equation with the quadratic term
+as a mere perturbation. But to proceed with this method let us first
+try an even simpler equation that can solved by hand in this technique. 
+\begin{equation}
+x^2-10x+1 = 0
+\end{equation}
+Which has the roots, (upto 4th decimal places) $9.8989$ and $0.1010$. 
+Write this in the following form,
+\begin{equation}
+x = \frac{1}{10}+\frac{x^2}{10} 
+\end{equation}
+Now let us try iterative method. First ignore the second term on the right. 
+This gives us our first approximation,
+\begin{equation}
+x_1 = 0.1
+\end{equation}
+Now the second one
+\begin{equation}
+x_2 = 0.1 + \frac{0.1*0.1}{10}
+\end{equation}
+and so on
+\begin{equation}
+x_j = 0.1 + 0.1*x_{j-1}^2
+\end{equation}
+Let us try to put this in a fortran code. To begin with let us
+forget about the beginning and end of the program but write its core first.
+<div class="code" >
+<pre><code>
+  x = 0.1 + 0.1*x*x 
+</pre></code>
+</div>
+This has to be iterated many times. First question is how many times ?
+As we dont know yet let us try it for $10$ times. In fortran such 
+a repeatative operation is done by a ${\tt do loop}$ constructed as
+follows:
+<div class="code" >
+<pre><code>
+do i=1,10
+  x = 0.1+0.1*x*x
+enddo
+</pre></code>
+</div>
+We also want to know how $x$ changes after each iteration:
+<div class="code" >
+<pre><code>
+do i=1,10
+  x = 0.1+0.1*x*x
+  write(*,*)'i,x',i,x
+enddo
+</pre></code>
+</div>
+But this also needs a first guess for $x$. Let that be $0$
+<div class="code" >
+<pre><code>
+x=0.
+do i=1,10
+  x = 0.1+0.1*x*x
+  write(*,*)'i,x',i,x
+enddo
+</pre></code>
+</div>
+Now put a beginning and an end:
+<div class="code" >
+<pre><code>
+program root_quadratic
+implicit none
+integer :: i
+real :: x
+x=0.
+do i=1,10
+  x = 0.1+0.1*x*x
+  write(*,*)'i,x',i,x
+enddo
+end program
+</pre></code>
+</div>
+Let us see what the output looks like:
+<div class="code" >
+<pre><code>
+ i,x           1  0.10000000    
+ i,x           2  0.10100000    
+ i,x           3  0.10102011    
+ i,x           4  0.10102051    
+ i,x           5  0.10102051    
+ i,x           6  0.10102051    
+ i,x           7  0.10102051    
+ i,x           8  0.10102051    
+ i,x           9  0.10102051    
+ i,x          10  0.10102051
+</pre></code>
+</div>
+Now note that if we want accuracy upto second place of decimal
+we may as well stop after the first iteration. Accuracy upto fourth
+place of decimal is obtained after second iteration. So we have pretty
+good convergence. Now let us try to make our code more user-friendly.
+Let our equation be of the standard quadratic form. The we have
+to input three number $a$, $b$ and $c$. And the iteration procedure
+will go as 
+\begin{equation}
+x_j = -\frac{c}{b} - \frac{a}{b}x_{j-1}^2
+\end{equation}
+With this addition our code looks like,
+<div class="code" >
+<pre><code>
+program root_quadratic
+implicit none
+integer :: i
+real :: x
+real :: a,b,c
+a = 1.
+b = -10.
+c = 1.
+x=0.
+do i=1,10
+  x = -(c/b)-(a/b)*x*x
+  write(*,*)'i,x',i,x
+enddo
+end program
+</pre></code>
+</div>
+So far so good. Now let us try this on the quadratic we were working on.
+\begin{equation}
+0.08x^2 + 2.75x + 23.43 = 0
+\end{equation}
+which as $a=0.08$, $b=2.75$ and $c=23.43$. 
+This time we get the output
+<div class="code" >
+<pre><code>
+           1   -8.5200005    
+           2  -10.631721    
+           3  -11.808247    
+           4  -12.576282    
+           5  -13.121101    
+           6  -13.528387    
+           7  -13.844138    
+           8  -14.095569    
+           9  -14.299929    
+          10  -14.468740
+</pre></code>
+</div>
+The iteration is no way as fast as the previous one. What is going on ?
+First let us try to see where the roots are. Let us calculate this function. 
+<div class="code" >
+<pre><code>
+program root_quadratic
+implicit none
+integer, parameter :: N = 100
+integer :: i
+real :: x,xmin,xmax,dx
+real :: a,b,c
+! The coefficients of the quadratic equation.
+a=0.08
+b=2.75
+c=23.43
+! First plot the function.
+! For this we need a minimum, a maximum and
+! an interval.
+xmin=-10.
+xmax=10.
+dx=(xmax-xmin)/float(N)
+! Now generate the function for N points
+! and write it to a file.
+! First open a file
+open(unit=10,file='quadratic')
+do i=1,N
+  x = xmin+dx*float(i-1)
+  y = a*x*x + b*x + c
+  write(10,*)x,y
+enddo
+close(10)
+! Now go into iterative method of finding the 
+! root
+x=0.
+do i=1,10
+  x = -(c/b)-(a/b)*x*x
+  write(*,*)'i,x',i,x
+enddo
+end program
+</pre></code>
+</div>
+Now look at the tabulated data in the file 'quadratic'. Notice these two
+points
+<div class="code" >
+<pre><code>
+  -18.900000      3.17995623E-02
+  -18.799999      5.19947615E-03
+  -18.699999     -1.98005978E-02
+  -18.600000     -4.32002284E-02
+
+  -15.700000     -2.58000903E-02
+  -15.599999     -1.19998469E-03
+  -15.499999      2.50001326E-02
+  -15.400000      5.27999885E-02
+</pre></code>
+</div>
+This shows that the equation has one root between $ -18.799999$ and $-18.699999$.
+And another root between $ -15.599999$ and $ -15.499999$. It is the smaller root
+to which our iterations were converting to. Let us check whether they were really
+converging by increasing the number of iterations from $10$ to $100$. 
+The end of the iterations look like
+<div class="code" >
+<pre><code>
+ i,x          86  -15.594783    
+ i,x          87  -15.594830    
+ i,x          88  -15.594872    
+ i,x          89  -15.594910    
+ i,x          90  -15.594944    
+ i,x          91  -15.594975    
+ i,x          92  -15.595004    
+ i,x          93  -15.595030    
+ i,x          94  -15.595054    
+ i,x          95  -15.595075    
+ i,x          96  -15.595094    
+ i,x          97  -15.595111    
+ i,x          98  -15.595127    
+ i,x          99  -15.595141    
+ i,x         100  -15.595155 
+</pre></code>
+</div>
+<p>Indeed we are converging, but the convergence was much slower than the first 
+problem we solved. Can you improve the convergence ? </p>
+
+<p> While we were solving this equation, we have actually found out a
+much more general universal method of root finding. By just tabulating the function and
+looking at its values we have found the limits on both the roots. 
+We can then just refine ${\tt dx}$ above and find the root upto a
+higher accuracy. Let us write a code that does this. It will
+turn out that such a code will be applicable to higher order
+polynomial equations and even transcendental equations.
+This technique of root-finding is called a <font color="dark-violet">binary
+chop</font>
+</p>
+
+<p> Before we end let us make a last note on rounding. We have noted that
+to subtract two floats which are close to each other it is useful
+to have a guard digit and then round off. The question then is
+how exactly do we round off. Till now we have been just ignoring
+the digits which are greater than $p$. But a better method is to 
+take them into account and use them to change the $p$-th digit of
+our float. An obvious way is to round to $0$ if $p+1$th digit
+is less than $5$ and round to $1$ otherwise. Another school
+of thought says that half the time $5$ should be rounded up and
+rounded down the other half. One way of doing this is by demanding
+that the rounded number will have its least significant digit to be even. </p>
+
+<p> Now let us look at an example
+\begin{equation}
+x = 1.00, y = -0.555 
+\end{equation}
+Look at the following sequence
+\begin{equation}
+x_0 = x_1, \nonumber \\
+x_1 = (x_0-y)+y, \nonumber \\
+x_2 = (x_1-y)+y \nonumber \\
+\cdots \nonumber \\
+x_n = (x_{n-1}-y)+y
+\end{equation}
+
+We get the following sequence by rounding up
+\begin{eqnarray}
+x_0 = 1.00 \nonumber \\
+x_1 = (1.00+0.555) - 0.555 \approx 1.56 - 0.555 = 1.005 \approx 1.01 \nonumber \\
+x_2 = (1.01+0.555) - 0.555 \approx 1.57 - 0.555 = 1.015 \approx 1.02 \nonumber \\
+\cdots 
+\end{eqnarray}
+This makes $x$ increase by $0.01$ at every iteration. 
+Now let us round to to even. Then the sequence looks like  
+\begin{eqnarray}
+x_0 = 1.00 \nonumber \\
+x_1 = (1.00+0.555) - 0.555 \approx 1.56 - 0.555 = 1.0005 \approx 1.00 \nonumber \\
+\cdots 
+\end{eqnarray}
+There is no problem at all. 
+
+<h5> Jargons </h5>
+<p> machine precision -- round-off and truncation error -- show the
+picture of how real numbers are stored from the first chapter of
+Numerical Recepies </p>
+
+<h4> Iterations and Maps </h4>
+
+<p> This connects us to the fascinating world of nonlinear maps. Let us start
+by considering the logistic map: 
+\begin{equation}
+x_{n+1} = \lambda x_n (1-x_n) 
+\end{equation}
+So far we have been concerned with similar iterations to solve quadratic equations.
+But our principal concern has been the rate of convergence of such iterations.
+But it might happens that the iterations we are considering will <font color="magenta">not</font> 
+converge to one value. This is of course a numerical nightmare from the point of view of
+finding roots. But this phenomenon worthy of study on its own right. </p>
+
+<ul>
+  <li> cobweb diagram
+  <li> Stability of Logistic map.
+  <li> Fig-tree 
+</ul>
+</p>
+
+<h4> Homework Problems </h4> 
+<p> <font size=2 em>Please return the solution of these problems by Thursday 21st of February midnight. The computer 
+programs should be checked-in in your directory at Google Drive that we share. The handwritten answers
+should be in my mailbox by the morning of 22nd February or handed over to me in class on the same
+day. The marks allocated to each problem is give inside parenthesis. The total marks of this homework 
+adds up to $100$. </font> </p>
+<ol>
+<li> Use the representation $p = 3$, $b = 2$, ${\rm emax} = 2$ and ${\rm emin} = -1$. How
+many (normalized) floats can you represent using this representation ?
+Write down all of them 
+<font style=oblique>(3 marks)</font>.
+<li> In the previous floating point represention what is the relative error
+corresponding to $0.5{\rm ulp}$ ?
+<font style=oblique>(2 marks)</font>.
+<li> <p> Let us use a floation point representation with base $b$ and number of
+significant digits $p$. Then prove that: <br> 
+(Hint: These three theorems which were
+mentioned in class are proved in the beautiful article  
+<a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">"What Every Computer Scientist Should Know About Floating-Point Arithmetic"</a>, 
+by 
+<a href="http://en.wikipedia.org/wiki/David_E._Goldberg">David  Goldberg</a>,  
+originally published in the March, 1991 issue of Computing Surveys. The purpose of this exercise is to 
+make you read this paper. ) </p> 
+  </p>
+  <ol type="a">
+   <li>   The relative error and the ulp are related by
+           \begin{equation}
+            \frac{1}{2} b^{-p} \leq \frac{1}{2} {\rm ulp} \leq \frac{b}{2} b^{-p} 
+            \end{equation}
+         <font style=oblique>(10 marks)</font>.
+    <li> The maximum relative error can be $b-1$. 
+         <font style=oblique>(10 marks)</font>.
+    <li> If $x$ and $y$ are two floating point numbers whose subtraction is done with a 
+         guard digit (i.e., $p+1$ digits) then the relative rounding error is less than 
+         $2\varepsilon$ where $\varepsilon$ is the machine precision. 
+         <font style=oblique>(10 marks)</font>.
+  </ol>
+<li> In fortran if you define a number to be real it implies that the computer uses a 
+   floating point representation where $b = 2$, $p = 23$, ${\rm emax} = 126$ and ${\rm emin} = -127$. 
+   What is the largest and the smallest number you can write in this system ? 
+   This number is a 32 bit or 4 byte number.  Show how that is consistent with the value of $b$,$p$,
+   ${\rm emax}$ and ${\rm emin}$ above  <font style=oblique>(5 marks)</font>.
+<li> Show by explicit example that floating point addition is not associative,
+i.e., $(a + b) + c$ and $a + (b + c)$ are not equal if $a$, $b$ and $c$ are three floating point
+numbers  <font style=oblique>(5 marks)</font>.
+<li> Assume you are doing $N$ floating point operations in your code. 
+      Each operation contributes maximum relative error $\epsilon$, What would you expect to be 
+     the maximum relative error of the whole code, and why   <font style=oblique>(10 marks)</font>?
+<li> Write a code to find the roots of a quadratic equation using Newton's method. The inputs of the 
+     code should be the three coefficients $a$, $b$ and $c$ in a quadratic equation
+     \begin{equation}
+      a x^2 + b x + c = 0
+     \end{equation}
+     and a starting guess for the root. It is not necessary to have sophisticated input and output. 
+     The fortran code should come with a README file that tells the user how to use the code (in less
+      than 3 sentences)  <font style=oblique>(20 marks)</font>.
+<li> <font color=dark-violet>Logistic Map</font>: 
+       Write a code to iterate the logistic map
+      \begin{equation}
+          x_{n+1} = \lambda x_n (1-x_n) 
+      \end{equation}
+       with $ 0 \leq \lambda \leq 4 $, and $ 0 \leq x \leq 1$. The map always has a fixed point at $x=0$. 
+      Show by numerical iterations of the map that:
+       <ol type="a">
+         <li> For that for $\lambda \lt 1$ the map has only one fixed point at $x=0$. 
+         <li> For that for $ 1 \leq \lambda \leq 3$ the map has one fixed point at 
+        $x = \frac{\lambda -1}{\lambda}$. 
+       <li> Plot the fixed point of the map as a function of $\lambda$ for $ 0 \leq \lambda \leq 4$. 
+       </ol>  
+      <font style=oblique>(30 marks)</font>.
+</ol>
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Sat Feb 16 13:40:00 CET 2013 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>

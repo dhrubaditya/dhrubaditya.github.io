@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Scicomp13: Lecture 2  </title>
+<link href= "../../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../../index.html">Home</a></li>
+    <li ><a href="../index.html">Teaching</a></li>
+    <li ><a href="./index.html">Scicomp13</a></li>
+    <li id="selected"><a href="./lecture2.html">Lecture 2</a></li>
+  </ul>
+</div>
+
+<div id="lcontent">
+<div class="eachitem">
+<h3> Lecture 2  </h3>
+<div id="summary">
+calculation of functions -- roots of transcendental equations -- subroutines -- organizing your code
+-- makefile -- interfacing C and fortran -- linking to existing libraries -- GSL -- how to write your own libraries 
+</div>
+<h4>Roots of polynomials </h4> 
+<ol>
+  <li> Newton's method -- Evaluation of polynomials and their
+  derivatives in an efficient manner (synthetic division) -- convergence of Newton's method - write a code
+  to implement binary chop and Newton's method for polynomials, Acton chapter 7 
+</ol>
+
+<h4>Subroutines </h4> 
+<p>
+Importance of organizing your code -- subroutines and functions -- calculation of factorial in a subroutine
+-- recursive subroutines -- writing the factorial evaluation as a recursive subroutine --
+point out that there is very little difference in
+efficiency as far as using recursive subroutines are concerned -- putting subroutines in separate
+files -- compiling and linking them together -- use of makefile 
+</p>
+
+<h4>Evaluating functions </h4>
+
+Before we find roots of transcendental functions we need to plot the functions.
+This itself can be a formidable task. Let us look at few examples.
+
+<ol>
+  <li> Evaluate $1-k^2$ for $k=0.99876$
+  <li> Sum the series $g(\theta) = \sum_{k=0}^{8} b_k \cos(k\theta)$ [Acton page 11].
+        Count the number of operations you need and show that it is more efficient to evaluate by
+        formula for multiple angles, also discuss the additional trick. 
+  <li> Evaluation of $e^{-x}$ by a power series summation. The series is absolutely and uniformly
+       convergent. But using it in a computer is a disaster. Rather use the series of $e^x$ and
+       invert the number you get. [Acton page 14]
+  <li> Use of recurrence relations and loss of error in them. Consider the example of
+      \begin{equation}
+           J_{n-1}(x) + J_{n+1}(x) = \frac{2n}{x} J_n(x)
+      \end{equation}
+      Start with the following values for $J_0$ and $J_1$ from tables or mathematica for example.
+      \begin{eqnarray}
+       J_0(1) = 0.765198 \\
+       J_1(1) = 0.440051
+      \end{eqnarray}
+      and proceed to show how much you loose precision. Rather run this iteration backward.
+      But an even better method is to use $kJ_n$ where $k$ is a normalizing factor. [Acton page 23-24]
+      This shows that most of the computation except the last normalizing step ocurrs by
+      integer arithmatic. 
+</ol>
+
+So the basic message is that in general it is better to use specialized libraries to get evaluation of
+function than to write your own code. But you must be aware of what those libraries must contain.
+One of the most important libraries in this regard is the GNU Scientific Library (GSL).
+
+<h5> Using GSL </h5>
+Let us begin with the GNU Scientific Library. This is a library
+that allows you to get values for many functions of mathematical
+physics. We have shown in earlier lectures how non-trivial it is
+to accurately calculate these mathematical functions. The GSL
+is hence of great potential use for us. But unfortunately it
+is in C. Let us try to see how we could use that. 
+
+As a first step download ${\tt gsl}$. Read its manual. 
+This of course takes some time ! For the very impatient,
+this is what you should do (But please do read the manual)
+<div class="code">
+<pre><code>
+ ./configure --prefix= DIRNAME
+  make
+  make install
+</code></pre>
+</div>
+This installs the library in the directory given by ${\tt DIRNAME}$. 
+Now let us try to first write a C code that uses this library. 
+Let us say we are trying to calculate Bessel function typically
+denoted by $J_{\ell}(x)$ for a particular value of $\ell=0$ and $x=2.$. 
+<div class="code">
+  <pre><code>
+#include <'stdio.h>
+#include <gsl/gsl_sf_bessel.h>
+/* compile with gcc test_gsl.c 
+-lgsl -lgslcblas -L<DIRNAME>/lib -I<DIRNAME>/include */ 
+     int main (void)
+     {
+       double x = 2.0;
+       double y = gsl_sf_bessel_J0 (x);
+       printf ("J0(%g) = %.18e\n", x, y);
+       return 0;
+     }
+</code></pre>
+  </div>
+I am not going to explain the C syntax above. But most
+of it is obvious. Note that we need to include the header files
+in the second line.  This code need to be compiled with the following
+command 
+<div class="code">
+  <pre><code>
+gcc test_gsl.c -lgsl -lgslcblas -L<DIRNAME>/lib -I<DIRNAME>/include
+</code></pre>
+</div>
+
+The ${\tt -L}$ tells the compiler where to find the library. 
+The ${\tt -I}$ tells the compiler where to find the hearder files
+it wants to include. In a very crude representation this library
+is a collection of object files. So your command compilers the
+code you wrote and then links it with this already compiled subroutine. 
+Now let us try to see how we could do this from fortran. In fortran
+the function call in C above should be made into a subroutine. 
+What is done is to first write a piece of C code which
+interfaces between the fortran code and the C library. 
+Such code are typically called ``wrapper''. Here is an example
+<div class="code">
+ <pre><code>
+/* c2f_gsl_sf_bessel_Jl.c */
+/*------------------------------------------*/
+#include <gsl/gsl_sf_bessel.h>
+
+void wrapper_sf_jl_(double* y, int*l, double* x){
+   *y = gsl_sf_bessel_jl(*l,*x);
+}
+</code></pre>
+</div>
+
+
+This calles the C function called ${\tt gsl\_sf\_bessel\_jl}$ which
+already exists in the library. This piece of code also make
+available a subroutine called ${\tt wrapper\_sf\_jl\_}$  to be
+called from fortran. The fortran code that uses this looks
+like
+<div class="code">
+ <pre><code>
+program test_gsl
+      integer, parameter :: N = 20
+      double precision :: x, y,deltax
+      integer :: l,i,j
+      l = 2
+      deltax = 1.0d0/dfloat(N)
+      do i=1,N
+        x = 0.0d0 + (i-1)*deltax 
+        call wrapper_sf_jl(y,l,x) 
+        write(*,*) x,y
+      enddo
+end program test_gsl
+</code></pre>
+</div>
+
+
+To use them all together you need to give the following command
+<div class="code">
+  <pre><code>
+gcc -c c2f_gsl_sf_bessel_Jl.c -lgsl 
+    -lgslcblas -L<DIRNAME>/lib -I<DIRNAME>/include
+</code></pre>
+</div>
+This creates an object file called ${\tt c2f\_gsl\_sf\_bessel\_Jl.o}$. 
+Next compile your fortran code
+<div class="code">
+<pre><code>
+gfortran -c test_gsl.f90
+</code></pre>
+</div>
+Next they are to be linked
+<div class="code">
+<pre><code>
+gfortran test_gsl.o c2f_gsl_sf_bessel_Jl.o -lgsl 
+    -lgslcblas -L<DIRNAME>/lib
+</code></pre>
+</div>
+This creates the file ${\tt a.out}$ whose output look like:
+<div class="code">
+<pre><code>
+0.0000000000000000        0.0000000000000000     
+  5.00000000000000028E-002  1.66636906828625437E-004
+  0.10000000000000001       6.66190608445568766E-004
+  0.15000000000000002       1.49759079189717937E-003
+  0.20000000000000001       2.65905607952738590E-003
+  0.25000000000000000       4.14809773936112517E-003
+  0.30000000000000004       5.96152486862021932E-003
+  0.35000000000000003       8.09545103937938867E-003
+  0.40000000000000002       1.05453023922702661E-002
+  0.45000000000000001       1.33058271610718183E-002
+  0.50000000000000000       1.63711066079934124E-002
+  0.55000000000000004       1.97345673464680987E-002
+  0.60000000000000009       2.33889950253352297E-002
+  0.65000000000000002       2.73265493454095607E-002
+  0.70000000000000007       3.15387803766147279E-002
+  0.75000000000000000       3.60166461411082356E-002
+  0.80000000000000004       4.07505314251498246E-002
+  0.85000000000000009       4.57302677798690840E-002
+  0.90000000000000002       5.09451546685796841E-002
+  0.95000000000000007       5.63839817158693565E-002
+</code></pre>
+</div>
+Obviously the process can be easily automatised by using a {\tt Makefile}. 
+I shall leave that for you to do. 
+
+Note finally that there can be further improvements to this piece of
+code. To make it run for any fortran compiler we need to take into
+account the fact that some compiler put one underscore, some put two
+and some none. This can be taken care in the following, possibly not
+unique, way (This piece of code is taken out of the pencil-code )
+<div class="code">
+  <pre><code>
+/* Wrapper C functions for the gsl library */
+#include <gsl/gsl_sf_bessel.h>
+#include <gsl/gsl_sf_legendre.h>
+#include <math.h>
+
+#include "headers_c.h"
+
+void FTNIZE(sp_besselj_l)
+     (REAL* y, FINT*l, REAL* x) {
+   *y =  gsl_sf_bessel_jl(*l,*x);
+}
+/* ------------------------------------------ */
+void FTNIZE(sp_bessely_l)
+     (REAL *y, FINT*l, REAL* x) {
+   *y =  gsl_sf_bessel_yl(*l,*x);
+}
+/* ------------------------------------------ */
+void FTNIZE(sp_harm_real)
+     (REAL *y, FINT *l, FINT *m, REAL *theta, REAL *phi) {
+  REAL Plm;
+  FINT ell = *l;
+  FINT emm = *m;
+  REAL fi = *phi;
+  REAL x =  cos(*theta);
+  if(emm<0){
+    Plm = gsl_sf_legendre_sphPlm(ell,-emm,x);
+    *y = pow(-1,emm)*Plm*cos(emm*fi);}
+  else{
+    Plm = gsl_sf_legendre_sphPlm(ell,emm,x);
+    *y = (REAL)pow(-1,emm)*Plm*cos(emm*fi);}
+}
+/* -------------------------------------------- */
+void FTNIZE(sp_harm_imag)
+     (REAL *y, FINT *l, FINT *m, REAL *theta, REAL *phi) {
+  REAL Plm;
+  FINT ell = *l;
+  FINT emm = *m;
+  REAL fi = *phi;
+  REAL x =  cos(*theta);
+  if(emm<0){
+    Plm = gsl_sf_legendre_sphPlm(ell,-emm,x);
+    *y = pow(-1,emm)*Plm*sin(emm*fi);}
+  else{
+    Plm = gsl_sf_legendre_sphPlm(ell,emm,x);
+    *y = (REAL)pow(-1,emm)*Plm*sin(emm*fi);}
+}
+</code></pre>
+</div>
+
+The code above is the wrapper. Note that it includes a header
+file called ${\tt headers_c.h}$ which actually defines what
+${\tt FTNIZE}$ means. The header file, also from pencil-code
+is given below:
+<div class="code">
+  <pre><code class="language-c">
+/*                             headers_c.h
+                              ------------
+*/
+
+<<<<<<< lecture2.html
+/* $Id: lecture2.html,v 1.12 2015/10/07 20:46:02 dhruba Exp $
+=======
+/* $Id: lecture2.html,v 1.12 2015/10/07 20:46:02 dhruba Exp $
+>>>>>>> 1.11
+   Description:
+     Common headers for all of our C files. Mostly required to get the
+     number of underscores and single vs. double precision right.
+*/
+
+/* Choose single or double precision here (typically done from the Makefile) */
+#ifdef DOUBLE_PRECISION
+#  define REAL double
+#  define FINT int		/* should this be long int? */
+#  define NBYTES 8
+#  define GSL_PREC GSL_PREC_SINGLE
+#else
+#  define REAL float
+#  define FINT int
+#  define NBYTES 4
+#  define GSL_PREC GSL_PREC_DOUBLE
+#endif
+
+/* Pick correct number of underscores here (2 for g95 without
+   `-fno-second-underscore', 1 for most other compilers).
+   Use the `-DFUNDERSC=1' option in the Makefile to set this.
+*/
+#if (FUNDERSC == 0)
+#  define FTNIZE(name) name
+#elif (FUNDERSC == 1)
+#  define FTNIZE(name) name##_
+#else
+#  define FTNIZE(name) name##__
+#endif
+
+/* End of file */
+</code></pre>
+</div>
+
+To the best of my knowledge this part of coding in the pencil-code
+was done by Wolfgang Dobler. Which underscore is chosen
+is chosen by an option in the ${\tt Makefile}$ . The
+example of the ${\tt Makefile}$ is not given here, you
+should try to write it. 
+
+<h4> Finding roots of transcendental equations </h4>
+
+<p> This is a topic of immense pleasure because this is where numerical shall beat
+analytical treatment hands down. </p>
+
+<p> The principal method is the binary chop or variant thereof -- Example from Acton pages 41 to 45
+-- Newton's method -- false position method -- secant method </p>
+
+<h4> Concept of Fortran module </p>
+
+Organizing code using module -- how to keep a tool box -- organize our codes in modules and
+calling them.
+
+<h4> Complex roots of polynomials </h4>
+
+Acton page 189 - 193. -- Newton's method
+
+<h4> Iterating complex maps </h4>
+
+Mandelbrot set and fractals. Code to construct the Cantor set, the Mandelbrot set and the Julia set.
+
+<h4> Homework Problems </h4> 
+<p> <font size=2 em>Please return the solution of these problems by Friday 22nd of February midnight. The computer 
+programs should be checked-in in your directory at Google Drive that we share. The handwritten answers
+should be in my mailbox by the morning of 23rd February or handed over to me in class on the same
+day. The marks allocated to each problem is give inside parenthesis. The total marks of this homework 
+adds up to $100$. </font> </p>
+<ol>
+  <li> Take the program we wrote in class to calculate the greatest
+  common divisor (GCD) of two integers. Use this as a subroutine to calculate the
+  lowest common multiple (LCM), which is the smallest integer that can be divided (with zero remainder)
+  by both the given integers, e.g., the LCM of $3$ and $2$ is $6$.
+  <li> Numerical solution of the transcendental equation:
+      Use the ${\tt gsl}$ library and the routine to find roots by the secant method that you have written in the homework problem
+      of Lecture 1 to solve the following problem: 
+      For $\ell = 10$, $r_{\rm min} =0.7$ and $r_{\rm max}=1.$, find $\alpha$ such that the following equations are solved,
+      \begin{equation}
+        a_{\ell}j_{\ell}(\alpha r) + b_{\ell}n_{\ell}(\alpha r) = 0
+      \end{equation}
+      for $r=r_{\rm min},r_{\rm max}$. Here the $j_{\ell}$ and $n_{\ell}$ are spherical Bessel functions.
+      There are infinite number of solutions for $\alpha$, find the first three in increasing order.
+     This equation arises while trying to solve the force-free equations in spherical coordinates. You can get further details about
+      the solution of the force--free equations from <a href="http://adsabs.harvard.edu/abs/1957ApJ...126..457C">Chandrasekhar and Kendall, Astrophysical Journal, <b> 126</b>, 457 (1975)</a>.
+  The solution of the transcendental equation is used in <a href="http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:0812.3106"> Mitra, Tavakol, Brandenburg and Moss, Astrophysical Journal, <b>697</b>923 (2008).</a>
+</ol>
+
+
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Sat Feb 16 13:25:10 CET 2013 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>

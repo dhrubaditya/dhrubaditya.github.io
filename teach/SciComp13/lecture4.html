@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Scicomp13: Lecture 4  </title>
+<link href= "../../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../../index.html">Home</a></li>
+    <li ><a href="../index.html">Teaching</a></li>
+    <li ><a href="./index.html">Scicomp13</a></li>
+    <li id="selected"><a href="./lecture4.html">Lecture 4</a></li>
+  </ul>
+</div>
+
+<div id="lcontent">
+<div class="eachitem">
+<h3> Lecture 4  </h3>
+<div id="summary">
+integration of ordinary differential equations -- Euler method, its accuracy and stability 
+-- Runge-Kutta method -- stiff equations and how to deal with them, backward Euler, exponential 
+integrators and implicit schemes -- stability does not mean accuracy.  
+</div>
+
+<h4> Homework Problems </h4> 
+<p> <font size=2 em>Please return the solution of these problems by Thursday 15th of March midnight. The computer 
+programs should be checked-in in your directory at Google Drive that we share. The handwritten answers
+should be in my mailbox by the morning of 16th of March or handed over to me in class on the same
+day. The marks allocated to each problem is give inside parenthesis. The total marks of this homework 
+adds up to $100$. </font> </p>
+
+ <p> For all the problems below, you can use the integrator module we wrote in class. </p>
+<ol>
+ <li> Start integrating the simple harmonic oscillator:
+\begin{eqnarray}
+ \dot{x}  &=& p \\  
+ \dot{p}  &=&  -\omega_0^2 x  \\  
+\end{eqnarray}
+with your choice of $\omega_0$ to plot its trajectory in the $x-p$ plane. This is the
+trajectory of the oscillator in phase space. By choosing many different intial conditions
+construct the phase space of the harmonic oscillator.  
+<li> Numerically solve the following equation:
+\begin{equation}
+\frac{1}{\xi^2} \frac{d}{d\xi} \left( \xi^2\frac{df}{d\xi} \right) = - f^3
+\end{equation}
+with the boundary conditions, $f^{\prime}(0) = 0 $ and $f(1) = 0$. 
+In particular show that $f(0) = 6.897$ and $f^{\prime}(1) = -2.018$. 
+
+This equations arises in study of equilibrium of a star. If we consider the star
+to be made of relavistic electrons, its chemical potential is related to its
+density by 
+\begin{equation}
+\mu = (3\pi^2)^{1/3} \hbar c \left ( \frac{\rho}{m^{\prime}} \right)^{1/3} 
+\end{equation}  
+where $\mu$ is the chemical potential as a function of radius $r$ and $\rho$ is the
+density. Take $m^{\prime} = 2 m_n$ where $m_n$ is nucleon mass. The density is related to
+the chemical potential also by the differential equation, 
+\begin{equation}
+\frac{1}{r^2} \frac{d}{dr} \left( r^2\frac{d \mu}{dr} \right) = - 4\pi m^{\prime} G \rho 
+\end{equation}
+From these two relations we obtain, 
+\begin{equation}
+\frac{1}{r^2} \frac{d}{dr} \left( r^2\frac{d \mu}{dr} \right) = - \lambda \mu^3, \hspace{2cm}
+
+\lambda =  \frac{4 G (m^{\prime})^2}{3\pi c^3 \hbar^3}  \rho 
+\end{equation}
+From dimensional consideration one can argue that 
+\begin{equation}
+\mu(r) = \frac{1}{R\sqrt{\lambda}} f\left(\frac{r}{R}\right)
+\end{equation}
+where $R$ is the radius of the star. Substituting $\xi = r/R$ we obtain the differential
+equation we solve. From the numerical solution for $\mu$ plot the the density as a function
+of $r/R$. You should be able to reproduce the "Curve 2" in Fig 50 of the book 
+"Statistical Physics" by Landau and Lifshitz.  You may have already realised that you
+can use your numerical solution to show that the "critical mass" of a white dwarf
+$M_0 $ is approximately equal to $1.45$ times the solar mass -- 
+the famous Chandrasekhar limit.  
+<li> <font color="dark-violet">Henon-Heiles problem: </font>
+<p> Consider the motion of a particle of unit mass in two dimensions under the action of the 
+hamiltonian
+\begin{eqnarray}
+{\mathcal H} &=& {\mathcal U}(x,y) + \frac{1}{2}(p^2_x + p^2_y) \\
+{\mathcal U} &=& \frac{1}{2}(x^2 + y^2) + \epsilon\left[x^2y - \frac{1}{3} y^3  \right]
+\end{eqnarray} 
+where $p_x = \dot{x} $ and $p_y= \dot{y}$. If $\epsilon=0$ we have the
+standard problem of a particle in a harmonic potential in two dimensions.
+For this exercise set $\epsilon=0$.  First write down the differential equations describing the
+motion of particle of unit mass in the Hamiltonian ${\mathcal H}$. Then solve these equations
+using the ode-solver written in class. You can do this by adding a new file called ${\tt henon\_heiles.f90}$
+motivated by the way the file ${\tt harmonic.f90}$ is written. As this is an hamiltonian system energy ($E$) is a
+conserved quantity that you can use to monitor the accuracy of your numerical integration scheme.
+The motion is now described in four-dimensional phase space of $x,y,p_x,p_y$.  For a fixed value of the
+conserved energy $E$ the motion can be described in the three dimensional space of $x,y,p_y$.
+Consider three different values of the energy $E = 0.08333,0.1250$,and $0.16667$. For each of these
+values : </p>
+<ol>
+  <li> plot the time-series of $x$,$y$,$p_x$ and $p_y$ for sufficient duration to give a qualitative
+      idea of their evolution.
+  <li> In the three dimensional space of $x,y,p_y$ consider the successive intersection of the trajectory
+       with the plane $x=0$. These points of intersections generate as set of points on the $(y,p_y)$ plane.
+       In this plane a point of intersection $P_{i+1}$ can be considered to be a map of the point $P_i$.
+       This technique of reducing the dimension of the problem by one by looking at the intersection of the
+       trajectory with a fixed plane in space is called taking a Poincare section. Plot the Poincare section
+       for the three values of $E$. 
+</ol>
+This problem first arose in studies galactic motion. Please see the <a href="http://adsabs.harvard.edu/abs/1964AJ.....69...73H">original paper</a>
+for a detailed description of this problem. The importance of this problem in studies of nonlinear dynamics can hardly be overstressed. 
+A beautiful personal description of the problem by M. Henon is 
+<a href="http://garfield.library.upenn.edu/classics1988/A1988L586000001.pdf">here</a>.
+<li> <font color="dark-violet">Lorenz problem: </font>
+<p> The following set of three ordinary differential equations was proposed by <a href="http://en.wikipedia.org/wiki/Edward_Norton_Lorenz">Edward Lorenz</a> as a simplified model of convection.
+\begin{eqnarray}
+\dot{x} &=& \sigma(y-x) \\
+\dot{y} &=&  x(\rho - z) - y   \\
+\dot{z} &=&  xy - \beta z 
+\end{eqnarray}
+Solve this set using the ode-solver we have written in class. Unlike the Henon-Heiles systems, energy is not a conserved quantity in this
+problem. This is rather an example of a dissipative dynamical system. Use $\rho = 28$, $\sigma = 10$ and $\beta = 8/3$.
+Calculate the trajectory for four different initial conditions. You can plot the trajectories using three dimensional plot, e.g., by using
+the ${\tt plot3d}$ function in matplotlib. This way, generate the famous two lobed Lorenz-attractor. Make several three dimensional
+plot of this attractor from different viewing angles. An example of this attractor can be found at
+<a href="http://www.scholarpedia.org/article/Chaos">a scholarpedia page</a>. </p>
+
+
+</ol>
+
+
+
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Sun Feb 24 21:23:02 CET 2013 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Scicomp13: Lecture 3  </title>
+<link href= "../../css_files/mystyles.css" rel="stylesheet" type="text/css" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript"
+  src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+<div id="headbar">
+  <div id="name"><h1>Dhrubaditya Mitra</h1> </div>
+  <div id="search_button">
+     <form method="get" action="http://www.google.com/search">
+       <div id="jsbox">
+         <input type="text"   name="q" size="32" value="" />
+       </div>
+       <div id="jsbox">
+         <input type="submit" value="Google" />
+       </div>
+       <div id="tickbox">
+         <input type="checkbox"  name="sitesearch"
+         value="www.nordita.org/~dhruba" checked /> only search my website<br />
+       </div>
+     </form>
+  </div>
+</div>
+<div >
+<div id="navbar">
+  <ul>
+    <li ><a href="../../index.html">Home</a></li>
+    <li ><a href="../index.html">Teaching</a></li>
+    <li ><a href="./index.html">Scicomp13</a></li>
+    <li id="selected"><a href="./lecture3.html">Lecture 3</a></li>
+  </ul>
+</div>
+
+<div id="lcontent">
+<div class="eachitem">
+<h3> Lecture 3  </h3>
+<div id="summary">
+interpolation -- need of spline -- quatradature -- Trapezoidal rule --
+  Simpson's rule -- Romberg integration 
+</div>
+
+<h4> Homework Problems </h4> 
+<p> <font size=2 em>Please return the solution of these problems by Thursday 15th of March midnight. The computer 
+programs should be checked-in in your directory at Google Drive that we share. The handwritten answers
+should be in my mailbox by the morning of 16th of March or handed over to me in class on the same
+day. The marks allocated to each problem is give inside parenthesis. The total marks of this homework 
+adds up to $100$. </font> </p>
+<ol>
+<li> The following three problems are from Acton's book. You can use the code {\tt quad.f90}
+that we wrote in class to do the numerical computation in this problem. In each of the
+numerical computations below note their convergence with the number of points $N$ you
+use to compute the integral. 
+  <ol>
+    <li> Evaluate
+    \begin{equation}
+    \int_0^{\pi/2} \sin x dx 
+    \end{equation}
+    by the trapezoidal rule, by Simpson's rule.
+    <font style=oblique>(20 marks)</font>
+    <li> Evaluate
+    \begin{equation}
+    \int_0^{1.553343} \tan x dx 
+    \end{equation}
+    by the same technique as the previous problem. Compare with the analytic answer.  
+    <font style=oblique>(20 marks)</font>
+   <li> Evaluate the integral in the previous problem having first subtracted 
+        $(\frac{\pi}{2} -x)^{-1}$ from $\tan x$ and then compensate by adding the analytic 
+        integral of this function to your result. Use Simpson's rule. 
+    <font style=oblique>(20 marks)</font>
+  </ol>
+<li> Write a subroutine that uses the Romberg integration technique as discussed in class. 
+(Do not copy the routine in Numerical Recepies.) For this exercise, first copy {\tt quad.f90}
+to your own directory (in the google code) and the romberg integration as a new
+subroutine in this module which uses that already existing trapezoidal integrator. 
+Then to show that the Romberg integral works integrate:
+\begin{equation}
+\int_0^1 \exp(-x^2) dx 
+\end{equation} 
+You can get a accurate value of this integral by writing it in terms of the error function
+(as discussed in class) and then finding out the value of the error function from
+{\tt gsl}. Give a piece of code that calculates the value of the function from {\tt gsl}
+library.  <font style=oblique>(40 marks)</font>
+</ol>
+</div>
+<div id="longfooter" >
+  <address></address>
+<p>
+  <!-- hhmts start -->Last modified: Sun Feb 24 11:10:52 CET 2013 <!-- hhmts end -->
+</p>
+</div>
+</body> </html>
