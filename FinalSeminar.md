@@ -1,5 +1,7 @@
 # The schedule of the end-of-project seminar
 
+zoom link : https://stockholmuniversity.zoom.us/j/67733982282 
+
 ## Wednesday 16 September  
 Student | Time (CET) | Topic | Advisor |
 --------|------------|-------|---------|
