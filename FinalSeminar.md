@@ -1,5 +1,7 @@
 # The schedule of the end-of-project seminar
 
+Each seminar is for 10 minutes plus 5 minutes for questions. 
+
 zoom link : https://stockholmuniversity.zoom.us/j/67733982282 
 
 ## Wednesday 16 September  
