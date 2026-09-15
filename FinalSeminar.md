@@ -48,7 +48,7 @@ Student | Time (CET) | Topic | Advisor |
 --------|------------|-------|---------|
 Katharina Badinger | 15:45 | Detecting many-body entanglement | Maria Hermanns |
 Simar Narula | 16:00 | TBA | Egor Babaev |
-Marcos Alvarez | 16:15 | Spectra of holographic defects | Ronnie R |
+Marcos Alvarez | 16:15 | Spectra of holographic defects | Ronnie Rodgers |
 Asad Mahdi | 16:30 | Anistropic quenched noise in phi^4 model | D. Mitra |
 Julio Barczyszyn | 16:45 | Theoretical equivalence in physics | G. Franzmann |
 
