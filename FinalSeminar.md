@@ -13,8 +13,7 @@ Aseem Chandra Pathak | 14:15 |	State transfer and splitting in quasiperiodic jun
 Writipriya Paul | 14:30 | Renormalized Perturbation Theory for Majda-McLaughlin-Tabak Model | D. Mitra |
 
 ## Friday 18 September
-
-#### Chairperson : Dhrubaditya Mitra
+#### Chairperson : Matthew de Courcey-Ireland
 Student | Time (CET) | Topic | Advisor |
 --------|------------|-------|---------|
 Eklavya Kukrety |14:30  | Rainich Conditions versus Energy Conditions in Higher Dimensions | S. Schuster |
@@ -40,7 +39,7 @@ Tuva Kallberg | 13:30 | Numerical solution of one-dimensional shock wave problem
 Sagnik Bhowmick | 13:45 | Monte-Carlo modeling of spectra and polarization in the black hole proximity | A. Veledina |
 Daisy Lee | 14:00 | Entangling two mechanical oscillators described as qubits | Sofia Qvafort |
 ### BREAK FOR 14:15 to 14:30 
-#### Chairperson : Matthew de Courcey-Ireland
+#### Chairperson : Dhrubaditya Mitra
 Student | Time (CET) | Topic | Advisor |
 --------|------------|-------|---------|
 Riccardo Zampieri  | 14:30 | Limits of quantum parametric feedback cooling | Sofia Qvafort |
