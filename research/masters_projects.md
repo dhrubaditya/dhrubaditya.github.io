@@ -6,8 +6,7 @@ The purpose is to give you an idea of the kind of problem we may attack.
 They are not set it stone. 
 
 
-##Project title:
-Field-theoretic RG for neural networks
+##Project title: Field-theoretic RG for neural networks
 ###Project description:
 Human brain is an example biological neural network.
 Unlike neural networks used in machine learning problems the connections
