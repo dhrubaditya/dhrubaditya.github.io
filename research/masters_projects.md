@@ -7,7 +7,9 @@ They are not set it stone.
 
 
 ##Project title: Field-theoretic RG for neural networks
+
 ###Project description:
+
 Human brain is an example biological neural network.
 Unlike neural networks used in machine learning problems the connections
 between neurons in biological networks is often local. It is thus possible
@@ -23,7 +25,9 @@ This has opened up the possibilty to explore other related models and explore
 certain key questions within this models, e.g., entropy production.
 The student needs to be familiar with either quantum field theory or
 statistical field theory. 
+
 ###Field:
+
 Soft Matter
 
 ---
