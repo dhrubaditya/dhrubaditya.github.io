@@ -6,9 +6,8 @@ The purpose is to give you an idea of the kind of problem we may attack.
 They are not set it stone. 
 
 
-##Project title: Field-theoretic RG for neural networks
-
-###Project description:
+## Project title: Field-theoretic RG for neural networks
+### Project description:
 
 Human brain is an example biological neural network.
 Unlike neural networks used in machine learning problems the connections
@@ -26,15 +25,12 @@ certain key questions within this models, e.g., entropy production.
 The student needs to be familiar with either quantum field theory or
 statistical field theory. 
 
-###Field:
-
-Soft Matter
+### Field:Soft Matter
 
 ---
 
-##Project title:
-Spectral code in GPUs
-###Project description:
+## Project title: Spectral code in GPUs
+### Project description:
 Let me first introduce two seemingly unrelated problems. 
 Linear waves appear  in many hydrodynamic problems in fluids and plasma. For
 example, ocean waves, Alfven waves, drift waves, etc.
@@ -58,14 +54,12 @@ study both of these problems and can be used in a single GPU
 to study them at very high resolutions. 
 This project is appropriate students with experience in numerical
 computations. The code will be released as an open-source project. 
-###Field:
-Soft Matter
+### Field: Soft Matter
 
 ---
 
-##Project title:
-Field theories for wave turbulence
-###Project description:
+## Project title: Field theories for wave turbulence
+### Project description:
 Linear waves appear  in many hydrodynamic problems in fluids and plasma. For
 example, ocean waves, Alfven waves, drift waves, etc.
 Under typical physical conditions the nonlinear effects in these problems are
@@ -79,14 +73,12 @@ This has opened up the possibility to go beyond the kinetic equation.
 The student needs to be familiar with either quantum field theory or
 statistical field theory. 
 
-###Field:
-Soft Matter
+### Field: Soft Matter
 
 ---
 
-##Project title:
-Statistical mechanics of Mobius strip
-###Project description:
+## Project title: Statistical mechanics of Mobius strip
+### Project description:
 This project is for a problem that is more "cute" than useful -- study
 thermal fluctuations of  surface in the form of a Mobius strip in Monte Carlo
 framework. 
@@ -103,12 +95,9 @@ This project is appropriate students with experience in numerical
 computations. 
 The code will be released as an open-source project. 
 
-###Field:
-Soft Matter
+###Field: Soft Matter
 
 ---
 
-###Principle Investigator:
-Dhrubaditya Mitra
-###Contacts (email):
-dhrubaditya.mitra@su.se
+### Principle Investigator: Dhrubaditya Mitra
+### Contacts (email): dhrubaditya.mitra@su.se
