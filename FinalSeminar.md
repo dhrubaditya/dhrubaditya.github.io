@@ -39,7 +39,7 @@ Tuva Kallberg | 13:30 | Numerical solution of one-dimensional shock wave problem
 Sagnik Bhowmick | 13:45 | Monte-Carlo modeling of spectra and polarization in the black hole proximity | A. Veledina |
 Daisy Lee | 14:00 | Entangling two mechanical oscillators described as qubits | Sofia Qvafort |
 ### BREAK FOR 14:15 to 14:30 
-#### Chairperson : Dhrubaditya Mitra
+#### Chairperson : Ronnie Rodgers 
 Student | Time (CET) | Topic | Advisor |
 --------|------------|-------|---------|
 Riccardo Zampieri  | 14:30 | Limits of quantum parametric feedback cooling | Sofia Qvafort |
