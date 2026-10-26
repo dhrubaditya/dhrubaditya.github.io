@@ -41,8 +41,8 @@ Latexed lecture notes that covers about 70% of the course material
 is <a href='./SM2026Notes.pdf'>here </a>. 
 Please be warned that the notes may contain mistakes, both
 trivial (typographical etc) and non-trivial. 
-Any student who points out a trivial (non-trivial) mistake gets a 
-small (nice) prize. 
+<!-- Any student who points out a trivial (non-trivial) mistake gets a 
+small (nice) prize. --> 
 In addition, the handouts I used last year 
 are <a href='./SM2026_Handouts.zip'>here as a zipped file</a>. 
 The boardwork follows these handouts quite closely. 
