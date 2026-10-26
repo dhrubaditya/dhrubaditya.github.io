@@ -18,15 +18,16 @@ to pass.
 
 ## use of AI 
 
-I do not how any use of AI can help you learn this course
-material better. If you want you can use any AI to help with
-your homework. If you do, then you need to include the
+I do not see how any use of AI can help you learn this course
+material better. Nevertheless, if you want, you can use any AI to help 
+you. If you do, then you need to include the
 following:
-<li> Which part of the work is yours and which part was done by AI. 
-<li> Exactly which AI (include version).
-<li> What prompt you used. 
-<li> Even if you use AI to do your homework, you need to write it out 
-in your own comprehensible handwriting. 
+
+- Which part of the work is yours and which part was done by AI. 
+- Exactly which AI (include version).
+- What prompt you used. 
+- Even if you use AI to do your homework, you need to write it out 
+  in your own comprehensible handwriting. 
 
 There will be no penalty if you use AI following the rules above;
 although I do NOT recommend using AI.
