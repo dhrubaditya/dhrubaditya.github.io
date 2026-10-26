@@ -38,7 +38,9 @@ although I do NOT recommend using AI.
 
 A sketch of the topics I plan to cover is <a href='./SM2026_syllabus.pdf'>here</a>. 
 Latexed lecture notes that covers about 70% of the course material 
-is <a href='./SM2026Notes.pdf'>here </a>. 
+is <a href="./SM2026Notes.pdf">here</a>.
+This is a large file, it is best to download it and then open it in a pdf viewer. 
+ 
 Please be warned that the notes may contain mistakes, both
 trivial (typographical etc) and non-trivial. 
 In addition, the handouts I used last year 
